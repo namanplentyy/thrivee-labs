@@ -1,0 +1,615 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/"
+  },
+  "jsonldType": "CareerProfile",
+  "schemaVersion": "0.1.0",
+  "profileId": "profile:synthetic-pharmacy-student",
+  "sourceDocuments": [
+    {
+      "id": "source:synthetic-resume",
+      "mediaType": "application/pdf",
+      "contentDigest": null,
+      "extractionMethod": "document-parser",
+      "pageCount": 1
+    }
+  ],
+  "identity": [],
+  "history": [
+    {
+      "id": "engagement:bpharm",
+      "engagementType": {
+        "id": "claim:engagement-bpharm-type",
+        "value": "education",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Bachelor of Pharmacy, Example University, 2022–2026",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "organization": {
+        "id": "claim:engagement-bpharm-organization",
+        "value": "Example University",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Example University",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "roleOrProgram": {
+        "id": "claim:engagement-bpharm-program",
+        "value": "Bachelor of Pharmacy",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Bachelor of Pharmacy",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "location": null,
+      "periods": [
+        {
+          "raw": "2022–2026",
+          "start": "2022",
+          "end": "2026",
+          "precision": "year",
+          "isCurrent": null,
+          "currentStatusBasis": "unstated",
+          "interpretationStatus": "normalized",
+          "occurrenceLabel": null,
+          "alternatives": [],
+          "notes": [
+            "The date range does not state whether the program is ongoing or completed."
+          ],
+          "provenance": [
+            {
+              "method": "deterministic-normalization",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "2022–2026",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "descriptions": [],
+      "credential": {
+        "credentialName": {
+          "id": "claim:engagement-bpharm-credential",
+          "value": "Bachelor of Pharmacy",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Bachelor of Pharmacy",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        },
+        "fieldOfStudy": {
+          "id": "claim:engagement-bpharm-field",
+          "value": "Pharmacy",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Bachelor of Pharmacy",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        },
+        "grade": null,
+        "ncrfCredits": null,
+        "nsqfLevel": null
+      },
+      "ambiguityRefs": [
+        "ambiguity:bpharm-current-status"
+      ],
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 0.99,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 1,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Bachelor of Pharmacy, Example University, 2022–2026",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "engagement:pharmacy-internship",
+      "engagementType": {
+        "id": "claim:engagement-internship-type",
+        "value": "internship",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Pharmacy Intern, Example Community Hospital, May 2025–July 2025",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "organization": {
+        "id": "claim:engagement-internship-organization",
+        "value": "Example Community Hospital",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Example Community Hospital",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "roleOrProgram": {
+        "id": "claim:engagement-internship-role",
+        "value": "Pharmacy Intern",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Pharmacy Intern",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "location": null,
+      "periods": [
+        {
+          "raw": "May 2025–July 2025",
+          "start": "2025-05",
+          "end": "2025-07",
+          "precision": "month",
+          "isCurrent": false,
+          "currentStatusBasis": "source-range-ended",
+          "interpretationStatus": "normalized",
+          "occurrenceLabel": null,
+          "alternatives": [],
+          "notes": [],
+          "provenance": [
+            {
+              "method": "deterministic-normalization",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "May 2025–July 2025",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "descriptions": [
+        {
+          "id": "claim:engagement-internship-description-1",
+          "value": "Reviewed adverse-event case reports under supervision.",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Reviewed adverse-event case reports under supervision.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "credential": null,
+      "ambiguityRefs": [],
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 1,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Pharmacy Intern, Example Community Hospital, May 2025–July 2025",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "sharedClaims": [],
+  "skills": [
+    {
+      "id": "skill:pharmacovigilance",
+      "label": {
+        "id": "claim:skill-pharmacovigilance-label",
+        "value": "Pharmacovigilance",
+        "provenance": [
+          {
+            "method": "agent-inferred",
+            "verificationStatus": "unverified",
+            "confidence": 0.78,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Reviewed adverse-event case reports under supervision.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": "https://example.org/agents/resume-parser"
+          }
+        ]
+      },
+      "claimStatement": {
+        "id": "claim:skill-pharmacovigilance-statement",
+        "value": "Has introductory experience reviewing adverse-event case reports under supervision.",
+        "provenance": [
+          {
+            "method": "agent-inferred",
+            "verificationStatus": "unverified",
+            "confidence": 0.74,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Reviewed adverse-event case reports under supervision.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": "https://example.org/agents/resume-parser"
+          }
+        ]
+      },
+      "contextRefs": [
+        "engagement:pharmacy-internship"
+      ],
+      "evidenceLinks": [
+        {
+          "id": "evidence:pharmacovigilance-internship",
+          "relation": "DemonstratedIn",
+          "targetRef": "engagement:pharmacy-internship",
+          "provenance": [
+            {
+              "method": "agent-inferred",
+              "verificationStatus": "unverified",
+              "confidence": 0.74,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Reviewed adverse-event case reports under supervision.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": "https://example.org/agents/resume-parser"
+            }
+          ]
+        }
+      ],
+      "taxonomyMappings": [],
+      "ambiguityRefs": []
+    }
+  ],
+  "interests": [
+    {
+      "id": "interest:regulatory-affairs",
+      "kind": "field",
+      "label": {
+        "id": "claim:interest-regulatory-affairs",
+        "value": "Regulatory Affairs",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Areas of interest: Regulatory Affairs",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "contextRefs": []
+    }
+  ],
+  "languages": [
+    {
+      "id": "language:english",
+      "language": {
+        "id": "claim:language-english",
+        "value": "English",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Languages: English",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "proficiency": null,
+      "modes": []
+    }
+  ],
+  "attributes": [],
+  "intent": {
+    "targets": [
+      {
+        "id": "target:regulatory-affairs-associate",
+        "kind": "role",
+        "value": {
+          "id": "claim:target-regulatory-affairs-associate",
+          "value": "Regulatory Affairs Associate",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Seeking Regulatory Affairs Associate roles.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      }
+    ],
+    "constraints": [],
+    "preferences": [
+      {
+        "id": "preference:hybrid-work",
+        "kind": "remote-work",
+        "value": {
+          "id": "claim:preference-hybrid-work",
+          "value": "Hybrid",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Prefer hybrid work.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "ambiguities": [
+    {
+      "id": "ambiguity:bpharm-current-status",
+      "kind": "date-interpretation",
+      "status": "unresolved",
+      "fieldPath": "/history/0/periods/0/isCurrent",
+      "reason": {
+        "id": "claim:ambiguity-bpharm-current-status-reason",
+        "value": "The date range does not explicitly state whether the program is ongoing or completed.",
+        "provenance": [
+          {
+            "method": "agent-inferred",
+            "verificationStatus": "unverified",
+            "confidence": 0.99,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Bachelor of Pharmacy, Example University, 2022–2026",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": "https://example.org/agents/resume-parser"
+          }
+        ]
+      },
+      "relatedRefs": [
+        "engagement:bpharm"
+      ],
+      "candidates": [
+        {
+          "value": "ongoing",
+          "candidateRefs": [
+            "engagement:bpharm"
+          ],
+          "confidence": 0.5,
+          "provenance": [
+            {
+              "method": "agent-inferred",
+              "verificationStatus": "unverified",
+              "confidence": 0.5,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "2022–2026",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": "https://example.org/agents/resume-parser"
+            }
+          ]
+        },
+        {
+          "value": "completed",
+          "candidateRefs": [
+            "engagement:bpharm"
+          ],
+          "confidence": 0.5,
+          "provenance": [
+            {
+              "method": "agent-inferred",
+              "verificationStatus": "unverified",
+              "confidence": 0.5,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "2022–2026",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": "https://example.org/agents/resume-parser"
+            }
+          ]
+        }
+      ],
+      "selectedValue": null
+    }
+  ],
+  "warnings": [
+    {
+      "code": "CURRENT_STATUS_UNSTATED",
+      "severity": "warning",
+      "message": "The B.Pharm date range does not establish whether the program is current or completed.",
+      "relatedRefs": [
+        "engagement:bpharm",
+        "ambiguity:bpharm-current-status"
+      ]
+    }
+  ]
+}
