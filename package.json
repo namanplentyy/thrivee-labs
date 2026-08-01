@@ -1,0 +1,24 @@
+{
+  "name": "@thrivee-labs/agent-native-career-schema",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Implementation artifacts for the Thrivee agent-native career profile schema.",
+  "type": "module",
+  "scripts": {
+    "build:transport-schema": "node scripts/build-transport-schema.mjs",
+    "check:transport-schema": "node scripts/build-transport-schema.mjs --check",
+    "typecheck": "tsc --noEmit",
+    "validate:examples": "python3 scripts/validate_examples.py",
+    "check": "npm run check:transport-schema && npm run validate:examples && npm run typecheck"
+  },
+  "files": [
+    "schemas",
+    "src",
+    "docs",
+    "examples"
+  ],
+  "devDependencies": {
+    "typescript": "7.0.2"
+  },
+  "license": "Apache-2.0"
+}

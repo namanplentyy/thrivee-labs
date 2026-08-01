@@ -1,0 +1,13 @@
+.DS_Store
+
+# Private research and evaluation material. Never publish from this repository.
+/research/
+/tests/
+
+# Local dependencies and build output.
+/node_modules/
+/dist/
+*.tsbuildinfo
+__pycache__/
+*.py[cod]
+/.venv/
