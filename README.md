@@ -77,6 +77,16 @@ v0.1 covers identity routing, career history, skills, interests, languages, pers
 
 See [the v0.1 schema contract](docs/v0.1/schema.md) for normative behavior.
 
+## Private resume conversion skill
+
+Codex discovers the repository-scoped `convert-resume-to-career-profile` skill under `.agents/skills/` when working inside this repository. Invoke it with an authorized PDF:
+
+```text
+$convert-resume-to-career-profile /absolute/path/to/resume.pdf
+```
+
+The skill resolves the live extraction version through `schemas/schema-manifest.json`, validates the canonical profile and transport round-trip, and saves only ignored private outputs under `private/career-profile-runs/`. Real resumes and derived profiles must never be committed or published.
+
 ## License
 
 Apache-2.0.

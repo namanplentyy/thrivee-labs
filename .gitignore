@@ -3,6 +3,7 @@
 # Private research and evaluation material. Never publish from this repository.
 /research/
 /tests/
+/private/
 
 # Local dependencies and build output.
 /node_modules/

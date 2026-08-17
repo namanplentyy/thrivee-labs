@@ -1,0 +1,15 @@
+{
+  "manifestVersion": "1",
+  "defaultExtractionVersion": "0.1.0",
+  "versions": {
+    "0.1.0": {
+      "status": "draft",
+      "canonicalSchema": "schemas/career-profile.v0.1.schema.json",
+      "transportSchema": "schemas/career-profile.transport.v0.1.schema.json",
+      "semanticContract": "docs/v0.1/schema.md",
+      "extractionContract": "docs/v0.1/extraction-contract.md",
+      "transportContract": "docs/v0.1/transport.md",
+      "converter": "scripts/convert-profile.mjs"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Convert Resume to Career Profile"
+  short_description: "Convert private resume PDFs to CareerProfile JSON-LD"
+  default_prompt: "Use $convert-resume-to-career-profile to convert this authorized resume PDF into a validated private CareerProfile JSON-LD run."

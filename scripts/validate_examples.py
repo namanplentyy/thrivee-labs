@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 ROOT = Path(__file__).resolve().parent.parent
 CANONICAL_SCHEMA = ROOT / "schemas" / "career-profile.v0.1.schema.json"
 TRANSPORT_SCHEMA = ROOT / "schemas" / "career-profile.transport.v0.1.schema.json"
+SCHEMA_MANIFEST = ROOT / "schemas" / "schema-manifest.json"
 CANONICAL_EXAMPLE = ROOT / "examples" / "career-profile.synthetic.jsonld"
 TRANSPORT_EXAMPLE = ROOT / "examples" / "career-profile.transport.synthetic.json"
 CONVERTER = ROOT / "scripts" / "convert-profile.mjs"
@@ -135,6 +136,73 @@ def assert_transport_has_no_jsonld_keys(schema: Any) -> None:
                     )
 
 
+def validate_schema_manifest(manifest: dict[str, Any]) -> None:
+    if manifest.get("manifestVersion") != "1":
+        raise AssertionError("Schema manifest must use manifestVersion '1'.")
+
+    versions = manifest.get("versions")
+    if not isinstance(versions, dict) or not versions:
+        raise AssertionError("Schema manifest must declare at least one version.")
+
+    default_version = manifest.get("defaultExtractionVersion")
+    if default_version not in versions:
+        raise AssertionError("defaultExtractionVersion must identify a declared version.")
+
+    required_paths = {
+        "canonicalSchema",
+        "transportSchema",
+        "semanticContract",
+        "extractionContract",
+        "transportContract",
+        "converter",
+    }
+    seen_paths: set[Path] = set()
+    for version, entry in versions.items():
+        if not isinstance(entry, dict):
+            raise AssertionError(f"Manifest entry {version!r} must be an object.")
+        if entry.get("status") not in {"draft", "stable", "deprecated"}:
+            raise AssertionError(f"Manifest entry {version!r} has an invalid status.")
+
+        missing = required_paths - set(entry)
+        if missing:
+            raise AssertionError(
+                f"Manifest entry {version!r} is missing paths: {sorted(missing)}"
+            )
+
+        resolved: dict[str, Path] = {}
+        for key in required_paths:
+            relative = Path(entry[key])
+            if relative.is_absolute() or ".." in relative.parts:
+                raise AssertionError(
+                    f"Manifest path {entry[key]!r} must stay inside the repository."
+                )
+            path = (ROOT / relative).resolve()
+            try:
+                path.relative_to(ROOT.resolve())
+            except ValueError as error:
+                raise AssertionError(
+                    f"Manifest path escapes the repository: {entry[key]!r}"
+                ) from error
+            if not path.is_file():
+                raise AssertionError(f"Manifest path does not exist: {entry[key]!r}")
+            resolved[key] = path
+            if key in {"canonicalSchema", "transportSchema"}:
+                if path in seen_paths:
+                    raise AssertionError(f"Schema path is reused: {entry[key]!r}")
+                seen_paths.add(path)
+
+        canonical = load_json(resolved["canonicalSchema"])
+        transport = load_json(resolved["transportSchema"])
+        if canonical.get("properties", {}).get("schemaVersion", {}).get("const") != version:
+            raise AssertionError(
+                f"Canonical schema for {version!r} does not declare that version."
+            )
+        if transport.get("properties", {}).get("schemaVersion", {}).get("const") != version:
+            raise AssertionError(
+                f"Transport schema for {version!r} does not declare that version."
+            )
+
+
 def convert(mode: str, input_path: Path) -> Any:
     completed = subprocess.run(
         ["node", str(CONVERTER), mode, str(input_path)],
@@ -149,12 +217,14 @@ def convert(mode: str, input_path: Path) -> Any:
 def main() -> None:
     canonical_schema = load_json(CANONICAL_SCHEMA)
     transport_schema = load_json(TRANSPORT_SCHEMA)
+    schema_manifest = load_json(SCHEMA_MANIFEST)
     canonical_example = load_json(CANONICAL_EXAMPLE)
     transport_example = load_json(TRANSPORT_EXAMPLE)
 
     Draft202012Validator.check_schema(canonical_schema)
     Draft202012Validator.check_schema(transport_schema)
     assert_transport_has_no_jsonld_keys(transport_schema)
+    validate_schema_manifest(schema_manifest)
 
     validate_schema(canonical_example, canonical_schema, "Canonical example")
     validate_schema(transport_example, transport_schema, "Transport example")
