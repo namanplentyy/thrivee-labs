@@ -95,7 +95,9 @@ python3 -m pip install -r requirements-dev.txt
 npm run check
 ```
 
-`npm run check` verifies that the transport schemas are current and share identical definitions, validates both v0.1 and v0.2 examples, runs the v0.2 semantic rules and their negative tests, answers every query fixture, and typechecks the TypeScript.
+`npm run check` verifies that the transport schemas are current and share identical definitions, validates both v0.1 and v0.2 examples, runs the v0.2 semantic rules and their negative tests, answers every query fixture, and typechecks the TypeScript. It runs on every push to `main` and every pull request through [`.github/workflows/check.yml`](.github/workflows/check.yml).
+
+`requirements-dev.txt` also installs the PDF tooling the private conversion skill needs. To run the checks alone, `requirements-check.txt` is enough, and that is what CI installs.
 
 Regenerate the transport schemas after changing any canonical schema:
 
