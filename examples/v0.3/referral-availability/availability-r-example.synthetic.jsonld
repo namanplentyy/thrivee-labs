@@ -1,0 +1,173 @@
+{
+  "@context": {
+    "@vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "@type": "ReferralAvailability",
+  "schemaVersion": "0.3.0",
+  "referralAvailabilityId": "referral-availability:r-example-2026",
+  "parties": [
+    {
+      "id": "party:r-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:r-example-name",
+        "value": "R. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/r-example",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:example-institute",
+      "type": "Party",
+      "partyKind": "organization",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:example-institute-name",
+        "value": "Example Institute of Technology",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/orgs/example-institute",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "subjectRef": "party:r-example",
+  "status": {
+    "id": "claim:r-example-availability-status",
+    "value": "open",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": null,
+        "inferringAgent": null
+      }
+    ]
+  },
+  "discoverability": {
+    "id": "claim:r-example-discoverability",
+    "value": "named",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": null,
+        "inferringAgent": null
+      }
+    ]
+  },
+  "scope": {
+    "organizations": [],
+    "domains": [
+      {
+        "id": "referral-scope:urban-transport",
+        "type": "ReferralScopeEntry",
+        "kind": "domain",
+        "label": {
+          "id": "claim:scope-urban-transport-label",
+          "value": "Urban transport planning",
+          "provenance": [
+            {
+              "method": "user-entered",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": null,
+              "inferringAgent": null
+            }
+          ]
+        },
+        "organizationRef": null
+      }
+    ],
+    "careerFamilies": [],
+    "relationshipRequirements": [
+      "professor",
+      "student"
+    ],
+    "note": "Happy to be named as a reference for former students working in transport."
+  },
+  "taxonomyMappings": [],
+  "validity": {
+    "validFrom": "2026-06-01",
+    "validUntil": "2027-05-31",
+    "observedAt": "2026-08-22T09:40:00Z",
+    "lastConfirmedAt": "2026-08-22T09:40:00Z"
+  },
+  "disclosure": {
+    "id": "disclosure:availability-r-example",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "agent-discoverable",
+    "basis": "subject-configured",
+    "rules": [],
+    "notes": [
+      "This referrer opted in to being named. Discoverability is an explicit choice, never a default."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-22T09:40:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [],
+  "verifications": [],
+  "ambiguities": [],
+  "warnings": []
+}

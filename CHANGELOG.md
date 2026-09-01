@@ -2,6 +2,42 @@
 
 All notable changes to the schema and implementation contract are recorded here.
 
+## 0.3.0-draft — 2026-09-01
+
+A referral and trust layer. v0.1 and v0.2 are untouched in meaning and remain valid; `CareerProfile` and `OpportunityIntent` stay at schema version `0.2.0` and are not duplicated. There is nothing to migrate. See [docs/v0.3/versioning.md](docs/v0.3/versioning.md).
+
+### Added
+
+- Four canonical documents around the career profile, never inside it: `RelationshipAssertion` (who knows whom, and in what dated context), `ReferralAvailability` (whether a person currently wants to be asked, and about what), `Endorsement` (what someone will vouch for, and on what basis), and `Referral` (one referrer, one candidate, one opportunity).
+- A `Party` primitive modelled on the existing `verifier` shape, so a professor or former manager who has never created a `CareerProfile` can be referenced by a routable identity without one being fabricated for them.
+- Three distinguishable relationship states — asserted, confirmed by the counterparty, verified by a third party — with counterparty confirmation modelled as a party act and verification reusing the v0.2 `Verification` record unchanged.
+- A closed relationship-type vocabulary with a real extension mechanism: `other` requires a `relationshipTypeExtensions[]` entry carrying the subject's own wording.
+- First-class `approvals[]` on a referral. A referral reaches `active` only with an approved referrer decision and an approved candidate decision, each attributed, dated and human-provenanced. `platform-suggested` records how a workflow started and is never itself a referral.
+- `discoverability` on referral availability (`none`, `anonymous-path-only`, `named`), so an employer agent can learn that referral paths exist without learning who is on them. Relationship documents may not default to `agent-discoverable`.
+- Deferred binding to the two unimplemented contracts: a reserved `requisition:` reference to a future `HiringIntent` with `bindingStatus`, and reserved `grant:` references to future `DisclosureGrant`s. No job-description fields and no disclosure rules are duplicated into a referral, and a referral may not widen the candidate's own disclosure policy.
+- Bundle-wide reference resolution: every trust reference must resolve across the candidate's documents, with `requisition:` and `grant:` the only deferred namespaces.
+- A published `contexts/trust-v0.3.context.jsonld` typing every trust reference property as `@id`, so the documents expand to a real graph. `schema:knows` is deliberately not used as the relationship term.
+- Ten synthetic trust documents forming one coherent scenario on the existing v0.2 synthetic candidate, in canonical and transport form, with no real people or organisations.
+- Eleven agent-query fixtures and four new read-only fixture operations (`across`, `count`, `inWindow`, `disclose`), including the privacy case that resolves two referral paths while disclosing one name.
+- Forty-three negative tests asserting that each v0.3 rule rejects a violating document.
+- Normative documentation: the referral contract, the relationship and graph model, transport notes, fixture notes and a versioning note.
+
+### Changed
+
+- `verification.targetRef` in the v0.2 career-profile schema widened to also accept `party:`, `relationship:`, `endorsement:` and `referral:` targets. This is a relaxation: every previously valid document stays valid, and it exists so the trust layer reuses the `Verification` record rather than forking a second verification model.
+- The transport build groups documents by `defsFamily` rather than by version, so shared definitions cannot drift between v0.2 and v0.3.
+- The schema manifest gained a `0.3.0` document-set entry declaring `reusesSupplySideFrom: "0.2.0"`. `defaultExtractionVersion` stays `0.2.0`, because resume extraction still produces a v0.2 profile and the private conversion skill is unaffected.
+
+### Deliberately excluded
+
+- No `referrals[]`, `endorsements[]` or `connections[]` field was added to `CareerProfile`.
+- No `referralStrength`, `referrerCredibility` or any other aggregate trust score. The factual inputs are exposed instead, and the weighing belongs to the consumer.
+- No matching or ranking, referral recommendation, social-graph crawling, messaging, notifications, recruiter or candidate interface, ATS integration, marketplace, consent service, referral payments, reputation scores, fraud detection, MCP server or API endpoint.
+
+### Status
+
+- Draft for private re-evaluation; not yet a stable public standard.
+
 ## 0.2.0-draft — 2026-09-01
 
 v0.1 is untouched and still valid. v0.2 is an additional version, and the schema manifest now defaults to it for new extraction runs.

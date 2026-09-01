@@ -1,0 +1,82 @@
+{
+  "id": "query:what-the-employer-may-see",
+  "question": "What information is the employer permitted to see once the referral has been approved?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "The referral does not answer this itself. It names the grant that answers it, and the candidate's own policy still binds: the contact route the profile withholds stays withheld no matter what a referral or a grant says. This is the seam between the trust layer and the DisclosureGrant contract, which is designed and deliberately not implemented."
+  ],
+  "steps": [
+    {
+      "name": "grantsThatDecide",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/disclosureGrantRefs"
+    },
+    {
+      "name": "referralDefault",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/disclosure/defaultVisibility"
+    },
+    {
+      "name": "referrerIdentity",
+      "op": "visibility",
+      "document": "referral-active",
+      "entityRef": "party:s-example"
+    },
+    {
+      "name": "candidateDisplayName",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "identity:display-name"
+    },
+    {
+      "name": "candidateContactRoute",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "identity:contact-route"
+    },
+    {
+      "name": "candidateWorkAuthorization",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "attribute:work-authorization"
+    },
+    {
+      "name": "relationshipPartyIdentity",
+      "op": "visibility",
+      "document": "relationship-managed",
+      "entityRef": "party:s-example"
+    },
+    {
+      "name": "endorsementDefault",
+      "op": "pointer",
+      "document": "endorsement-role-performance",
+      "pointer": "/disclosure/defaultVisibility"
+    },
+    {
+      "name": "opportunityBinding",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/opportunity/bindingStatus"
+    },
+    {
+      "name": "opportunityReference",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/opportunity/opportunityRef"
+    }
+  ],
+  "expect": {
+    "grantsThatDecide": ["grant:2026-q4-example-authority"],
+    "referralDefault": "requires-grant",
+    "referrerIdentity": "requires-grant",
+    "candidateDisplayName": "agent-discoverable",
+    "candidateContactRoute": "withheld",
+    "candidateWorkAuthorization": "requires-grant",
+    "relationshipPartyIdentity": "withheld",
+    "endorsementDefault": "requires-grant",
+    "opportunityBinding": "deferred-hiring-intent",
+    "opportunityReference": "requisition:2026-q4-transport-planner"
+  }
+}

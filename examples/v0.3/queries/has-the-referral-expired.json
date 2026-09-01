@@ -1,0 +1,68 @@
+{
+  "id": "query:has-the-referral-expired",
+  "question": "Has this referral expired, evaluated at an explicit date rather than the system clock?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Expiry is not a status. The same document answers differently at two dates, and its `status` stays `active` in both, because status records the lifecycle decision people made while the window records how long that decision holds. A consumer that read the status alone would still be acting on a referral in December."
+  ],
+  "steps": [
+    {
+      "name": "inWindowInSeptember",
+      "op": "inWindow",
+      "document": "referral-active",
+      "asOf": "2026-09-01"
+    },
+    {
+      "name": "inWindowInNovember",
+      "op": "inWindow",
+      "document": "referral-active",
+      "asOf": "2026-11-15"
+    },
+    {
+      "name": "statusInBoth",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/status"
+    },
+    {
+      "name": "validFrom",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/validity/validFrom"
+    },
+    {
+      "name": "validUntil",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/validity/validUntil"
+    },
+    {
+      "name": "suggestionInWindowInSeptember",
+      "op": "inWindow",
+      "document": "referral-suggested",
+      "asOf": "2026-09-01"
+    },
+    {
+      "name": "suggestionInWindowInOctober",
+      "op": "inWindow",
+      "document": "referral-suggested",
+      "asOf": "2026-10-05"
+    },
+    {
+      "name": "expiredIdentifiers",
+      "op": "expired",
+      "document": "referral-active",
+      "asOf": "2026-11-15"
+    }
+  ],
+  "expect": {
+    "inWindowInSeptember": true,
+    "inWindowInNovember": false,
+    "statusInBoth": "active",
+    "validFrom": "2026-08-28",
+    "validUntil": "2026-10-31",
+    "suggestionInWindowInSeptember": true,
+    "suggestionInWindowInOctober": false,
+    "expiredIdentifiers": ["referral:s-example-refers-a-example"]
+  }
+}

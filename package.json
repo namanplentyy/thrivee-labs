@@ -10,9 +10,11 @@
     "typecheck": "tsc --noEmit",
     "validate:examples": "python3 scripts/validate_examples.py",
     "validate:v0.2": "python3 scripts/validate_v0_2.py",
+    "validate:v0.3": "python3 scripts/validate_v0_3.py",
     "test:v0.2-rules": "python3 scripts/test_v0_2_rules.py",
+    "test:v0.3-rules": "python3 scripts/test_v0_3_rules.py",
     "test:queries": "python3 scripts/run_query_fixtures.py",
-    "check": "npm run check:transport-schema && npm run validate:examples && npm run validate:v0.2 && npm run test:v0.2-rules && npm run test:queries && npm run typecheck"
+    "check": "npm run check:transport-schema && npm run validate:examples && npm run validate:v0.2 && npm run validate:v0.3 && npm run test:v0.2-rules && npm run test:v0.3-rules && npm run test:queries && npm run typecheck"
   },
   "files": [
     "schemas",

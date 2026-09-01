@@ -1,7 +1,7 @@
 # Design proposal: the demand side, `RoleProfile` and `HiringIntent`
 
-- Status: **design only**. No schema, no types, no converter, no examples. Nothing in this document is implemented in v0.2.
-- Purpose: describe the employer-side counterpart to `CareerProfile` and `OpportunityIntent` closely enough that v0.2 does not accidentally block it.
+- Status: **design only**. No schema, no types, no converter, no examples. Nothing in this document is implemented in v0.2 or v0.3.
+- Purpose: describe the employer-side counterpart to `CareerProfile` and `OpportunityIntent` closely enough that v0.2 and v0.3 do not accidentally block it.
 
 ## 1. The symmetry
 
@@ -14,6 +14,37 @@ CareerProfile      + OpportunityIntent      (a person, and their current positio
         v                    v
 RoleProfile        + HiringIntent           (a role, and a live requisition for it)
 ```
+
+v0.3 adds a third axis. Trust is neither supply nor demand: it is the layer that says who will vouch for whom, and it connects a candidate to a specific requisition without either side containing the other.
+
+```
+CareerProfile + OpportunityIntent                              supply     v0.2
+            ↕
+      Matching Layer
+            ↕
+RoleProfile + HiringIntent                                     demand     design only
+
+            +
+
+RelationshipAssertion + ReferralAvailability                   trust      v0.3
+      + Endorsement + Referral
+            ↓
+      DisclosureGrant                                                     design only
+```
+
+The nine documents and where each stands today:
+
+| Document | Side | Status |
+|---|---|---|
+| `CareerProfile` | Supply, persistent | Implemented, v0.2 |
+| `OpportunityIntent` | Supply, temporary | Implemented, v0.2 |
+| `RelationshipAssertion` | Trust, persistent | Implemented, v0.3 |
+| `ReferralAvailability` | Trust, temporary | Implemented, v0.3 |
+| `Endorsement` | Trust, reusable | Implemented, v0.3 |
+| `Referral` | Trust, opportunity-specific | Implemented, v0.3 |
+| `DisclosureGrant` | Permission | Design only |
+| `RoleProfile` | Demand, persistent | Design only |
+| `HiringIntent` | Demand, temporary | Design only |
 
 | | Persistent | Temporary |
 |---|---|---|
@@ -111,14 +142,29 @@ Both sides can also be unknown on any dimension, and the unknowns stay visible r
 
 **This is a join, not a ranking.** Producing a comparable structure is a schema problem and belongs here. Deciding that one candidate is better than another is a policy problem, and it is deliberately out of scope: no score, no weighting, no threshold, and no ordering is defined by this project.
 
-## 6. What v0.2 already did for this
+## 6. What a referral needs from `HiringIntent`
+
+v0.3 implements referrals against a requisition that does not exist yet, so the binding is stated once and deferred rather than guessed at.
+
+A `Referral` carries an `opportunity` object with a `requisition:` identifier and `bindingStatus: "deferred-hiring-intent"`. No job-description fields are copied into it: no title, no requirements, no band, no location. A `label` exists so the document is readable by a person, and that is all.
+
+When `HiringIntent` is implemented:
+
+- `Referral.opportunity.opportunityRef` resolves to a `requisitionId`, and `bindingStatus` becomes `resolved-hiring-intent`. The v0.3 validator already rejects that status while nothing resolves, so the transition is enforced rather than assumed.
+- Nothing else in `Referral` changes. That is the point of referencing an opportunity instead of inlining one.
+- The trust layer joins the matching surface as a filter a consumer may apply — "of the candidates whose occupation code matches, which have an active referral?" — and never as a score contributing to a ranking.
+
+Open question 4 in section 7 asked where an application or an introduction lives. A `Referral` answers part of it: it is a third contract alongside `DisclosureGrant`, holding neither side's persistent state, and it stays out of `CareerProfile`. An *application* remains unmodelled.
+
+## 7. What v0.2 already did for this
 
 - The shared `$defs` are already written so a third and fourth document can copy them verbatim: `validity`, `provenance`, `sourceDocument`, `sourceLocator`, `stringClaim`, `taxonomyMapping`, `taxonomyCandidate`, `disclosure`, `disclosureRule`, `disclosureSelector`, `ambiguity`, `warning`.
 - `capabilityKind`, the evidence relation vocabulary, `compensationExpectation`, `locationPreference`, `employmentTypeClaim` and `workModeClaim` are shaped for reuse rather than for the supply side alone.
-- The build script's parity check already spans documents of one version, so adding two more documents extends the existing mechanism rather than replacing it.
+- The build script's parity check already spans documents of one version, so adding two more documents extends the existing mechanism rather than replacing it. v0.3 widened it to a `defsFamily` that spans versions, which is the form `RoleProfile` and `HiringIntent` should join.
 - `examples/v0.2/queries/supply-and-demand-share-an-occupation-code.json` demonstrates the occupation join working today, with only the supply side implemented.
+- v0.3 proved the copy-verbatim assumption by doing it: four more documents reuse every definition in the first bullet without one of them being forked. Nothing about adding a fifth and sixth is different.
 
-## 7. Open questions
+## 8. Open questions
 
 1. Does `RoleProfile` need an `Organisation` entity, or is a claim-wrapped name enough until an organisation registry exists?
 2. Should a requisition be able to override a role requirement, or must a differing requirement fork a new role profile? Overriding is convenient and makes the persistent side less meaningful.

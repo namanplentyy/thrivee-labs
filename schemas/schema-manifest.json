@@ -27,6 +27,33 @@
           "transportSchema": "schemas/opportunity-intent.transport.v0.2.schema.json"
         }
       }
+    },
+    "0.3.0": {
+      "status": "draft",
+      "reusesSupplySideFrom": "0.2.0",
+      "semanticContract": "docs/v0.3/referrals.md",
+      "transportContract": "docs/v0.3/transport.md",
+      "jsonLdContext": "contexts/trust-v0.3.context.jsonld",
+      "migrationGuide": "docs/v0.3/versioning.md",
+      "converter": "scripts/convert-profile.mjs",
+      "documents": {
+        "RelationshipAssertion": {
+          "canonicalSchema": "schemas/relationship-assertion.v0.3.schema.json",
+          "transportSchema": "schemas/relationship-assertion.transport.v0.3.schema.json"
+        },
+        "ReferralAvailability": {
+          "canonicalSchema": "schemas/referral-availability.v0.3.schema.json",
+          "transportSchema": "schemas/referral-availability.transport.v0.3.schema.json"
+        },
+        "Endorsement": {
+          "canonicalSchema": "schemas/endorsement.v0.3.schema.json",
+          "transportSchema": "schemas/endorsement.transport.v0.3.schema.json"
+        },
+        "Referral": {
+          "canonicalSchema": "schemas/referral.v0.3.schema.json",
+          "transportSchema": "schemas/referral.transport.v0.3.schema.json"
+        }
+      }
     }
   }
 }

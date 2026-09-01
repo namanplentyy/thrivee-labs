@@ -1,0 +1,70 @@
+{
+  "id": "query:endorsement-from-someone-who-supervised",
+  "question": "Does this candidate have a confirmed endorsement for GIS from someone who supervised them?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "The honest answer is a qualified no, and the documents can express it. There is a confirmed GIS endorsement, but it comes from a `professor` relationship, not a supervisory one. The person who did manage the candidate endorsed role performance instead. An agent that could only see 'has an endorsement' would answer this question wrongly."
+  ],
+  "steps": [
+    {
+      "name": "gisEndorsementTargets",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/targetRefs"
+    },
+    {
+      "name": "gisEndorser",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/endorserRef"
+    },
+    {
+      "name": "gisEndorsementBasis",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/basisRefs"
+    },
+    {
+      "name": "basisRelationshipTypes",
+      "op": "pointer",
+      "document": "relationship-taught",
+      "pointer": "/relationshipTypes"
+    },
+    {
+      "name": "basisRelationshipConfirmed",
+      "op": "pointer",
+      "document": "relationship-taught",
+      "pointer": "/counterparty/status"
+    },
+    {
+      "name": "partiesWhoManaged",
+      "op": "across",
+      "documents": ["relationship-taught", "relationship-managed", "relationship-unconfirmed"],
+      "where": { "/relationshipTypes": { "contains": "manager" } },
+      "select": "/partyBRef"
+    },
+    {
+      "name": "whatTheManagerEndorsed",
+      "op": "pointer",
+      "document": "endorsement-role-performance",
+      "pointer": "/scope"
+    },
+    {
+      "name": "managerEndorsedCapabilities",
+      "op": "across",
+      "documents": ["endorsement-role-performance"],
+      "where": { "/scope": "capability" },
+      "select": "/endorsementId"
+    }
+  ],
+  "expect": {
+    "gisEndorsementTargets": ["capability:spatial-analysis", "capability:qgis"],
+    "gisEndorser": "party:r-example",
+    "gisEndorsementBasis": ["relationship:r-example-taught-a-example", "engagement:mplan"],
+    "basisRelationshipTypes": ["professor"],
+    "basisRelationshipConfirmed": "confirmed",
+    "partiesWhoManaged": ["party:s-example"],
+    "whatTheManagerEndorsed": "role-performance",
+    "managerEndorsedCapabilities": []
+  }
+}

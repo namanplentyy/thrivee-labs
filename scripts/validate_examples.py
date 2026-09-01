@@ -163,6 +163,20 @@ def validate_schema_manifest(manifest: dict[str, Any]) -> None:
         if entry.get("status") not in {"draft", "stable", "deprecated"}:
             raise AssertionError(f"Manifest entry {version!r} has an invalid status.")
 
+        if "documents" in entry:
+            # A document-set entry: several canonical documents at one version, with
+            # no single schema to name. The version's own validator checks its paths.
+            if "reusesSupplySideFrom" not in entry:
+                raise AssertionError(
+                    f"Manifest entry {version!r} declares documents but does not say which "
+                    "version it reuses the supply-side documents from."
+                )
+            if entry["reusesSupplySideFrom"] not in versions:
+                raise AssertionError(
+                    f"Manifest entry {version!r} reuses an undeclared version."
+                )
+            continue
+
         missing = required_paths - set(entry)
         if missing:
             raise AssertionError(

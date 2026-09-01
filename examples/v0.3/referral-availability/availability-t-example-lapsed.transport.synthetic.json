@@ -1,0 +1,133 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "ReferralAvailability",
+  "schemaVersion": "0.3.0",
+  "referralAvailabilityId": "referral-availability:t-example-2025",
+  "parties": [
+    {
+      "id": "party:t-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:t-example-name",
+        "value": "T. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/t-example",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "subjectRef": "party:t-example",
+  "status": {
+    "id": "claim:t-example-availability-status",
+    "value": "open",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": null,
+        "inferringAgent": null
+      }
+    ]
+  },
+  "discoverability": {
+    "id": "claim:t-example-discoverability",
+    "value": "named",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": null,
+        "inferringAgent": null
+      }
+    ]
+  },
+  "scope": {
+    "organizations": [],
+    "domains": [
+      {
+        "id": "referral-scope:urban-transport",
+        "type": "ReferralScopeEntry",
+        "kind": "domain",
+        "label": {
+          "id": "claim:scope-urban-transport-label",
+          "value": "Urban transport planning",
+          "provenance": [
+            {
+              "method": "user-entered",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": null,
+              "inferringAgent": null
+            }
+          ]
+        },
+        "organizationRef": null
+      }
+    ],
+    "careerFamilies": [],
+    "relationshipRequirements": [],
+    "note": null
+  },
+  "taxonomyMappings": [],
+  "validity": {
+    "validFrom": "2025-01-01",
+    "validUntil": "2025-12-31",
+    "observedAt": "2025-01-05T08:00:00Z",
+    "lastConfirmedAt": "2025-01-05T08:00:00Z"
+  },
+  "disclosure": {
+    "id": "disclosure:availability-t-example",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "requires-grant",
+    "basis": "subject-configured",
+    "rules": [],
+    "notes": [
+      "The window closed on 2025-12-31. A closed window is not an open one, and it is not a stated refusal either."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2025-01-05T08:00:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [],
+  "verifications": [],
+  "ambiguities": [],
+  "warnings": []
+}

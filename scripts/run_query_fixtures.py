@@ -1,10 +1,15 @@
-"""Answer agent-oriented questions from the v0.2 synthetic documents.
+"""Answer agent-oriented questions from the v0.2 and v0.3 synthetic documents.
 
 Each fixture states a question, the deterministic steps that resolve it, and the
 expected answer. The point is to prove the schema carries enough structured
 information to answer the question. The resolver only reads, filters and follows
 references: it does not score, rank, or match candidates, and it never reads the
 system clock -- every time-dependent fixture supplies an explicit `asOf`.
+
+The v0.3 trust questions span several documents, so the resolver can read across a
+named set of documents. It still only reads: deciding that one referral path is
+worth more than another is a policy question this project deliberately leaves to
+the consumer.
 """
 from __future__ import annotations
 
@@ -19,14 +24,53 @@ import validate_examples as v01  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 EXAMPLES = ROOT / "examples" / "v0.2"
-FIXTURES = EXAMPLES / "queries"
+TRUST = ROOT / "examples" / "v0.3"
+FIXTURE_DIRECTORIES = (EXAMPLES / "queries", TRUST / "queries")
 
 DOCUMENTS = {
     "career-profile": EXAMPLES / "career-profile.synthetic.jsonld",
     "opportunity-intent": EXAMPLES / "opportunity-intent.synthetic.jsonld",
+    "relationship-taught": TRUST
+    / "relationships"
+    / "relationship-r-example-taught.synthetic.jsonld",
+    "relationship-managed": TRUST
+    / "relationships"
+    / "relationship-s-example-managed.synthetic.jsonld",
+    "relationship-unconfirmed": TRUST
+    / "relationships"
+    / "relationship-t-example-unconfirmed.synthetic.jsonld",
+    "endorsement-capability": TRUST
+    / "endorsements"
+    / "endorsement-r-example-spatial-analysis.synthetic.jsonld",
+    "endorsement-role-performance": TRUST
+    / "endorsements"
+    / "endorsement-s-example-role-performance.synthetic.jsonld",
+    "availability-managed": TRUST
+    / "referral-availability"
+    / "availability-s-example.synthetic.jsonld",
+    "availability-taught": TRUST
+    / "referral-availability"
+    / "availability-r-example.synthetic.jsonld",
+    "availability-lapsed": TRUST
+    / "referral-availability"
+    / "availability-t-example-lapsed.synthetic.jsonld",
+    "referral-active": TRUST / "referrals" / "referral-s-example-active.synthetic.jsonld",
+    "referral-suggested": TRUST
+    / "referrals"
+    / "referral-platform-suggested.synthetic.jsonld",
 }
 
 VISIBILITY_PRECEDENCE = ("entityRefs", "sensitivities", "collections")
+
+# The property that carries a document's own identifier, one per document type.
+DOCUMENT_ID_PROPERTIES = (
+    "profileId",
+    "intentId",
+    "relationshipId",
+    "referralAvailabilityId",
+    "endorsementId",
+    "referralId",
+)
 
 
 class FixtureError(AssertionError):
@@ -95,7 +139,9 @@ def resolve_visibility(document: dict[str, Any], entity_ref: str) -> str:
 def expired_ids(document: dict[str, Any], as_of: str) -> list[str]:
     """Ids of state whose validity window has closed on `as_of`."""
     expired: list[str] = []
-    document_id = document.get("profileId") or document.get("intentId")
+    document_id = next(
+        (document[name] for name in DOCUMENT_ID_PROPERTIES if name in document), None
+    )
     for path, value in v01.walk(document):
         if not isinstance(value, dict):
             continue
@@ -118,6 +164,13 @@ def matches_condition(item: dict[str, Any], field: str, condition: Any, results:
         if isinstance(allowed, str) and allowed.startswith("$"):
             allowed = results[allowed[1:]]
         return actual in (allowed or [])
+    if isinstance(condition, dict) and "contains" in condition:
+        selector = condition.get("select")
+        values = [
+            resolve_pointer(entry, selector) if selector else entry
+            for entry in (actual or [])
+        ]
+        return condition["contains"] in values
     return actual == condition
 
 
@@ -130,9 +183,58 @@ def load_document(name: str) -> dict[str, Any]:
 _DOCUMENT_CACHE: dict[str, dict[str, Any]] = {}
 
 
+def within_window(document: dict[str, Any], as_of: str) -> bool:
+    """Whether the document's own validity window contains an explicit date."""
+    validity = document["validity"]
+    start, end = validity["validFrom"], validity["validUntil"]
+    if start is not None and start > as_of[: len(start)]:
+        return False
+    if end is not None and end < as_of[: len(end)]:
+        return False
+    return True
+
+
+def disclose(document: dict[str, Any], entity_ref: str, selector: str) -> Any:
+    """Read a party's detail only where the subject opted in to being named.
+
+    Willingness to be asked is not permission to be named. A referrer who chose
+    `anonymous-path-only` is counted as a path and never resolved to a person.
+    """
+    if document.get("discoverability", {}).get("value") != "named":
+        return None
+    if resolve_visibility(document, entity_ref) != "agent-discoverable":
+        return None
+    return resolve_pointer(entity_index(document)[entity_ref][1], selector)
+
+
 def run_step(step: dict[str, Any], fixture: dict[str, Any], results: dict[str, Any]) -> Any:
-    document = load_document(step["document"])
     operation = step["op"]
+
+    if operation == "count":
+        counted = step["of"]
+        return len(results[counted[1:]] if isinstance(counted, str) else counted)
+
+    if operation == "across":
+        as_of = step.get("inWindowAt")
+        selected = []
+        for name in step["documents"]:
+            candidate = load_document(name)
+            if as_of is not None and not within_window(candidate, as_of):
+                continue
+            if all(
+                matches_condition(candidate, field, condition, results)
+                for field, condition in step.get("where", {}).items()
+            ):
+                selected.append(resolve_pointer(candidate, step.get("select", "/id")))
+        return selected
+
+    document = load_document(step["document"])
+
+    if operation == "inWindow":
+        return within_window(document, step.get("asOf", fixture["asOf"]))
+
+    if operation == "disclose":
+        return disclose(document, step["entityRef"], step.get("select", "/id"))
 
     if operation == "pointer":
         return resolve_pointer(document, step["pointer"])
@@ -185,9 +287,11 @@ def run_fixture(fixture: dict[str, Any]) -> list[str]:
 
 
 def main() -> int:
-    fixture_paths = sorted(FIXTURES.glob("*.json"))
+    fixture_paths = sorted(
+        path for directory in FIXTURE_DIRECTORIES for path in directory.glob("*.json")
+    )
     if not fixture_paths:
-        print(f"No query fixtures found in {FIXTURES}")
+        print(f"No query fixtures found in {[str(d) for d in FIXTURE_DIRECTORIES]}")
         return 1
 
     failures = 0

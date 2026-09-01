@@ -1,0 +1,150 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "RelationshipAssertion",
+  "schemaVersion": "0.3.0",
+  "relationshipId": "relationship:a-example-knows-t-example",
+  "parties": [
+    {
+      "id": "party:a-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": "profile:synthetic-transport-planner",
+      "displayName": {
+        "id": "claim:a-example-name",
+        "value": "A. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": null,
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:t-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:t-example-name",
+        "value": "T. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/t-example",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "partyARef": "party:a-example",
+  "partyBRef": "party:t-example",
+  "relationshipTypes": [
+    "colleague",
+    "other"
+  ],
+  "relationshipTypeExtensions": [
+    {
+      "id": "relationship-type:symposium-co-presenter",
+      "type": "RelationshipTypeExtension",
+      "label": {
+        "id": "claim:symposium-co-presenter-label",
+        "value": "Co-presenter at a synthetic transport symposium",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "uri": null
+    }
+  ],
+  "contexts": [],
+  "assertedByRef": "party:a-example",
+  "counterparty": {
+    "status": "unconfirmed",
+    "confirmedByRef": null,
+    "confirmedAt": null,
+    "note": "Stated by A. Example only. T. Example has not been asked and has confirmed nothing.",
+    "provenance": []
+  },
+  "validity": {
+    "validFrom": "2025",
+    "validUntil": null,
+    "observedAt": "2026-08-20T10:00:00Z",
+    "lastConfirmedAt": null
+  },
+  "disclosure": {
+    "id": "disclosure:relationship-t-example",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "withheld",
+    "basis": "subject-configured",
+    "rules": [],
+    "notes": [
+      "A unilateral claim is withheld outright. It is the weakest state in the model and must not leak a name."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-20T10:00:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [],
+  "verifications": [],
+  "ambiguities": [],
+  "warnings": []
+}

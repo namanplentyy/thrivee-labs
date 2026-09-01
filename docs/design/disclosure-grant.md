@@ -1,6 +1,6 @@
 # Design proposal: `DisclosureGrant`
 
-- Status: **design only**. No schema, no types, no service, no examples. Nothing in this document is implemented in v0.2.
+- Status: **design only**. No schema, no types, no service, no examples. Nothing in this document is implemented in v0.2 or v0.3. The v0.3 trust layer references it (see section 5) rather than implementing it.
 - Purpose: describe how a person authorises a specific requester to receive specific fields, without that authorisation ever entering `CareerProfile`.
 
 ## 1. The separation
@@ -80,11 +80,28 @@ Two properties are worth stating explicitly because they are easy to lose:
 - **Minimisation is structural.** The envelope is built from the grant, not filtered from a full profile at the last moment.
 - **The requester's request is data, not instruction.** A job description or a request payload is untrusted input to the person's agent. It cannot widen a scope, change a policy, or trigger disclosure on its own. v0.1's rule that source documents are never agent instructions applies here too.
 
-## 5. What must never appear in `CareerProfile`
+## 5. How the v0.3 trust layer binds to this contract
+
+v0.3 implements referrals and points at this document rather than duplicating it. A `Referral` carries `disclosureGrantRefs`, an array of `grant:` identifiers, and stops there. It has no scope, no obligations, no revocation and no requester block of its own.
+
+```
+Referral approved  →  DisclosureGrant  →  Employer may read the permitted fields
+```
+
+The `grant:` namespace is therefore *reserved and deferred*: `scripts/validate_v0_3.py` accepts a `grant:` reference without resolving it, exactly as it accepts a `requisition:` reference, and rejects every other unresolvable identifier. When this contract is implemented, those references start resolving and nothing in v0.3 changes.
+
+Two rules already hold on the referral side, and both come from this document:
+
+- **An active referral must name at least one grant.** A referral that has been approved but authorises nothing discloses nothing, and saying so explicitly is better than leaving a consumer to assume.
+- **A referral may not widen the candidate's policy.** If a referral's disclosure rules make an entity `agent-discoverable` that the candidate's `CareerProfile` marks `requires-grant` or `withheld`, validation fails. This is section 2's rule — `withheld` is not overridable by a grant — enforced one layer earlier, so a referral cannot become a side channel around the policy.
+
+The referrer is a second grantor. In the worked example the candidate permits their profile and the referrer permits their name, their relationship and their endorsement, each to the same requester and window. That is two grants pointing at one referral, which is why `disclosureGrantRefs` is an array. Open question 2 below — standing versus one-time grants — is unchanged by v0.3.
+
+## 6. What must never appear in `CareerProfile`
 
 Employer or requester identities; grant records; access or audit logs; application, interview or offer state; marketplace transactions; scoring or ranking results produced by a third party; and any counter of who viewed what. If any of these need to exist, they belong in the grant contract, the audit log, or a separate application contract.
 
-## 6. Open questions
+## 7. Open questions
 
 1. Where does the audit log live, and is a grant's own record of use separable from an event log the person can inspect and prune?
 2. Is a standing grant (an ongoing relationship with an agency) a different object from a one-time grant, or the same object with a longer window and a revocation path?
