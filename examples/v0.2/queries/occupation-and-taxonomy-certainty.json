@@ -1,0 +1,78 @@
+{
+  "id": "query:occupation-and-taxonomy-certainty",
+  "question": "Which external codes describe this person, and how certain is each mapping?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Certainty is structural: an adopted code carries a match type and a reviewed method, while unreviewed suggestions stay in candidates."
+  ],
+  "steps": [
+    {
+      "name": "adoptedCodes",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "mappingStatus": "mapped"
+      },
+      "select": "/code"
+    },
+    {
+      "name": "adoptedMatchTypes",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "mappingStatus": "mapped"
+      },
+      "select": "/matchType"
+    },
+    {
+      "name": "adoptedMethods",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "mappingStatus": "mapped"
+      },
+      "select": "/mappingMethod"
+    },
+    {
+      "name": "ambiguousMappings",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "mappingStatus": "ambiguous"
+      },
+      "select": "/id"
+    },
+    {
+      "name": "unmappedSubjects",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "mappingStatus": "unmapped"
+      },
+      "select": "/subjectRef"
+    }
+  ],
+  "expect": {
+    "adoptedCodes": [
+      "2164"
+    ],
+    "adoptedMatchTypes": [
+      "close-match"
+    ],
+    "adoptedMethods": [
+      "manual-reviewed"
+    ],
+    "ambiguousMappings": [
+      "taxonomy-mapping:spatial-analysis-esco"
+    ],
+    "unmappedSubjects": [
+      "capability:qgis",
+      "engagement:mplan"
+    ]
+  }
+}

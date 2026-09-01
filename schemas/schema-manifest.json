@@ -1,6 +1,6 @@
 {
   "manifestVersion": "1",
-  "defaultExtractionVersion": "0.1.0",
+  "defaultExtractionVersion": "0.2.0",
   "versions": {
     "0.1.0": {
       "status": "draft",
@@ -10,6 +10,23 @@
       "extractionContract": "docs/v0.1/extraction-contract.md",
       "transportContract": "docs/v0.1/transport.md",
       "converter": "scripts/convert-profile.mjs"
+    },
+    "0.2.0": {
+      "status": "draft",
+      "canonicalSchema": "schemas/career-profile.v0.2.schema.json",
+      "transportSchema": "schemas/career-profile.transport.v0.2.schema.json",
+      "semanticContract": "docs/v0.2/schema.md",
+      "extractionContract": "docs/v0.2/extraction-contract.md",
+      "transportContract": "docs/v0.2/transport.md",
+      "converter": "scripts/convert-profile.mjs",
+      "jsonLdContext": "contexts/career-v0.2.context.jsonld",
+      "migrationGuide": "docs/v0.2/migration-from-v0.1.md",
+      "additionalDocuments": {
+        "OpportunityIntent": {
+          "canonicalSchema": "schemas/opportunity-intent.v0.2.schema.json",
+          "transportSchema": "schemas/opportunity-intent.transport.v0.2.schema.json"
+        }
+      }
     }
   }
 }

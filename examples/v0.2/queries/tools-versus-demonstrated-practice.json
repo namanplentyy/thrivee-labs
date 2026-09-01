@@ -1,0 +1,77 @@
+{
+  "id": "query:tools-versus-demonstrated-practice",
+  "question": "Which entries are tools, which are skills, and which are things this person has actually done?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "A v0.1 skills array could not answer this: QGIS, spatial analysis and running an accessibility study were structurally identical."
+  ],
+  "steps": [
+    {
+      "name": "tools",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "capabilities",
+      "where": {
+        "capabilityKind": "tool"
+      },
+      "select": "/label/value"
+    },
+    {
+      "name": "skills",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "capabilities",
+      "where": {
+        "capabilityKind": "skill"
+      },
+      "select": "/label/value"
+    },
+    {
+      "name": "knowledge",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "capabilities",
+      "where": {
+        "capabilityKind": "knowledge"
+      },
+      "select": "/label/value"
+    },
+    {
+      "name": "practices",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "capabilities",
+      "where": {
+        "capabilityKind": "practice"
+      },
+      "select": "/label/value"
+    },
+    {
+      "name": "practiceLastDemonstrated",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "capabilities",
+      "where": {
+        "capabilityKind": "practice"
+      },
+      "select": "/lastDemonstratedAt"
+    }
+  ],
+  "expect": {
+    "tools": [
+      "QGIS"
+    ],
+    "skills": [
+      "Spatial analysis"
+    ],
+    "knowledge": [
+      "Transport demand modelling"
+    ],
+    "practices": [
+      "Conducting a transport accessibility analysis"
+    ],
+    "practiceLastDemonstrated": [
+      "2024-06"
+    ]
+  }
+}

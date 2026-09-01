@@ -1,0 +1,68 @@
+{
+  "id": "query:what-an-agent-may-see",
+  "question": "Which parts of this profile can an agent read without a grant, and which need explicit permission?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Exercises disclosure precedence: the contact route is highly sensitive, which would mean requires-grant, but an entity-level rule withholds it outright."
+  ],
+  "steps": [
+    {
+      "name": "displayName",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "identity:display-name"
+    },
+    {
+      "name": "currentLocation",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "identity:current-location"
+    },
+    {
+      "name": "contactRoute",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "identity:contact-route"
+    },
+    {
+      "name": "workAuthorization",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "attribute:work-authorization"
+    },
+    {
+      "name": "currentEmployment",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "engagement:mobility-cell"
+    },
+    {
+      "name": "toolCapability",
+      "op": "visibility",
+      "document": "career-profile",
+      "entityRef": "capability:qgis"
+    },
+    {
+      "name": "compensationRuleVisibility",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/disclosure/rules/0/visibility"
+    },
+    {
+      "name": "profileDefault",
+      "op": "pointer",
+      "document": "career-profile",
+      "pointer": "/disclosure/defaultVisibility"
+    }
+  ],
+  "expect": {
+    "displayName": "agent-discoverable",
+    "currentLocation": "agent-discoverable",
+    "contactRoute": "withheld",
+    "workAuthorization": "requires-grant",
+    "currentEmployment": "agent-discoverable",
+    "toolCapability": "agent-discoverable",
+    "compensationRuleVisibility": "requires-grant",
+    "profileDefault": "agent-discoverable"
+  }
+}

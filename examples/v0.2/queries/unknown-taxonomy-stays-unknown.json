@@ -1,0 +1,123 @@
+{
+  "id": "query:unknown-taxonomy-stays-unknown",
+  "question": "What is the ESCO code for spatial analysis, and the NSQF level of the degree?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "A negative fixture. Three different kinds of not-knowing stay distinguishable: reviewed and no code applies, two unreviewed suggestions, and never looked up."
+  ],
+  "steps": [
+    {
+      "name": "spatialAnalysisAdoptedCode",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:spatial-analysis-esco"
+      },
+      "select": "/code"
+    },
+    {
+      "name": "spatialAnalysisStatus",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:spatial-analysis-esco"
+      },
+      "select": "/mappingStatus"
+    },
+    {
+      "name": "spatialAnalysisCandidateCode",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:spatial-analysis-esco"
+      },
+      "select": "/candidates/0/code"
+    },
+    {
+      "name": "spatialAnalysisCandidateMethod",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:spatial-analysis-esco"
+      },
+      "select": "/candidates/0/method"
+    },
+    {
+      "name": "qgisEscoStatus",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:qgis-esco"
+      },
+      "select": "/mappingStatus"
+    },
+    {
+      "name": "qgisEscoMethod",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:qgis-esco"
+      },
+      "select": "/mappingMethod"
+    },
+    {
+      "name": "nsqfStatus",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:mplan-nsqf"
+      },
+      "select": "/mappingStatus"
+    },
+    {
+      "name": "nsqfMethod",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "id": "taxonomy-mapping:mplan-nsqf"
+      },
+      "select": "/mappingMethod"
+    },
+    {
+      "name": "nsqfLevelClaim",
+      "op": "pointer",
+      "document": "career-profile",
+      "pointer": "/history/0/credential/nsqfLevel"
+    }
+  ],
+  "expect": {
+    "spatialAnalysisAdoptedCode": [
+      null
+    ],
+    "spatialAnalysisStatus": [
+      "ambiguous"
+    ],
+    "spatialAnalysisCandidateCode": [
+      "S1.7.1"
+    ],
+    "spatialAnalysisCandidateMethod": [
+      "agent-suggested"
+    ],
+    "qgisEscoStatus": [
+      "unmapped"
+    ],
+    "qgisEscoMethod": [
+      "reviewed-no-match"
+    ],
+    "nsqfStatus": [
+      "unmapped"
+    ],
+    "nsqfMethod": [
+      "not-attempted"
+    ],
+    "nsqfLevelClaim": null
+  }
+}

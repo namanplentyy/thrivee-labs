@@ -1,0 +1,89 @@
+{
+  "id": "query:evidence-behind-a-capability",
+  "question": "What evidence supports the accessibility analysis practice, and has any of it been verified?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Traverses capability to evidence to artifact, then finds verifications by their targetRef. Targets carry no back-references, so verification is discovered in one direction only."
+  ],
+  "steps": [
+    {
+      "name": "evidenceIds",
+      "op": "follow",
+      "document": "career-profile",
+      "from": "capability:accessibility-analysis-practice",
+      "refs": "evidenceRefs",
+      "select": "/id"
+    },
+    {
+      "name": "evidenceRelations",
+      "op": "follow",
+      "document": "career-profile",
+      "from": "capability:accessibility-analysis-practice",
+      "refs": "evidenceRefs",
+      "select": "/relation"
+    },
+    {
+      "name": "evidenceTargets",
+      "op": "follow",
+      "document": "career-profile",
+      "from": "capability:accessibility-analysis-practice",
+      "refs": "evidenceRefs",
+      "select": "/targetRef"
+    },
+    {
+      "name": "exercisedCapabilities",
+      "op": "follow",
+      "document": "career-profile",
+      "from": "capability:accessibility-analysis-practice",
+      "refs": "exercisesRefs",
+      "select": "/label/value"
+    },
+    {
+      "name": "confirmedVerifiers",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "verifications",
+      "where": {
+        "targetRef": {
+          "in": "$evidenceIds"
+        },
+        "status": "confirmed"
+      },
+      "select": "/verifier/name/value"
+    },
+    {
+      "name": "verificationDates",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "verifications",
+      "where": {
+        "targetRef": {
+          "in": "$evidenceIds"
+        },
+        "status": "confirmed"
+      },
+      "select": "/verifiedAt"
+    }
+  ],
+  "expect": {
+    "evidenceIds": [
+      "evidence:accessibility-report-produced"
+    ],
+    "evidenceRelations": [
+      "ProducedIn"
+    ],
+    "evidenceTargets": [
+      "artifact:accessibility-report"
+    ],
+    "exercisedCapabilities": [
+      "QGIS",
+      "Spatial analysis"
+    ],
+    "confirmedVerifiers": [
+      "Example Metropolitan Development Authority"
+    ],
+    "verificationDates": [
+      "2026-03-11"
+    ]
+  }
+}

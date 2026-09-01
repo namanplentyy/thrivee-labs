@@ -1,0 +1,502 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "OpportunityIntent",
+  "schemaVersion": "0.2.0",
+  "intentId": "intent:synthetic-2026-autumn-search",
+  "subjectRef": "profile:synthetic-transport-planner",
+  "validity": {
+    "validFrom": "2026-08-01",
+    "validUntil": "2026-12-31",
+    "observedAt": "2026-08-14T09:12:00Z",
+    "lastConfirmedAt": "2026-08-14T09:12:00Z"
+  },
+  "disclosure": {
+    "id": "disclosure:intent-policy",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "agent-discoverable",
+    "basis": "subject-configured",
+    "rules": [
+      {
+        "id": "disclosure-rule:compensation-requires-grant",
+        "type": "DisclosureRule",
+        "selector": {
+          "entityRefs": [],
+          "sensitivities": [],
+          "collections": [
+            "compensationExpectation"
+          ]
+        },
+        "visibility": "requires-grant",
+        "basis": "subject-configured",
+        "note": "Compensation expectations are disclosed only under an explicit grant.",
+        "validity": {
+          "validFrom": "2026-08-01",
+          "validUntil": null,
+          "observedAt": "2026-08-14T09:12:00Z",
+          "lastConfirmedAt": "2026-08-14T09:12:00Z"
+        }
+      }
+    ],
+    "notes": [
+      "Looking status, target roles, preferred locations, work mode and availability are discoverable by agents."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-14T09:12:00Z",
+      "lastConfirmedAt": "2026-08-14T09:12:00Z"
+    }
+  },
+  "sourceDocuments": [
+    {
+      "id": "source:synthetic-intent-statement",
+      "type": "SourceDocument",
+      "mediaType": "text/plain",
+      "contentDigest": null,
+      "extractionMethod": "user-entry",
+      "pageCount": null,
+      "ingestedAt": "2026-08-14T09:12:00Z"
+    }
+  ],
+  "lookingStatus": {
+    "id": "claim:looking-status",
+    "value": "actively-looking",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": {
+          "documentId": "source:synthetic-intent-statement",
+          "page": null,
+          "charStart": null,
+          "charEnd": null,
+          "sourceText": "I am actively looking for a new transport planning role.",
+          "textDigest": null,
+          "textNormalization": "exact"
+        },
+        "inferringAgent": null
+      }
+    ]
+  },
+  "availability": {
+    "availableFrom": "2026-10-01",
+    "noticePeriod": {
+      "value": 30,
+      "unit": "day"
+    },
+    "note": null,
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": {
+          "documentId": "source:synthetic-intent-statement",
+          "page": null,
+          "charStart": null,
+          "charEnd": null,
+          "sourceText": "Available from 1 October 2026 after a 30 day notice period.",
+          "textDigest": null,
+          "textNormalization": "exact"
+        },
+        "inferringAgent": null
+      }
+    ]
+  },
+  "targetRoles": [
+    {
+      "id": "target:transport-planner",
+      "type": "IntentTarget",
+      "kind": "occupation",
+      "value": {
+        "id": "claim:target-transport-planner",
+        "value": "Transport planner",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-intent-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Looking for transport planner roles.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "target:urban-mobility",
+      "type": "IntentTarget",
+      "kind": "career-family",
+      "value": {
+        "id": "claim:target-urban-mobility",
+        "value": "Urban mobility and transport planning",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-intent-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Looking for transport planner roles.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      }
+    }
+  ],
+  "preferredLocations": [
+    {
+      "id": "location:ahmedabad",
+      "type": "LocationPreference",
+      "label": {
+        "id": "claim:location-ahmedabad",
+        "value": "Ahmedabad",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-intent-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Prefer Ahmedabad, and would consider Gandhinagar.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "granularity": "city",
+      "countryCode": "IN",
+      "strength": "preferred",
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-intent-statement",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Prefer Ahmedabad, and would consider Gandhinagar.",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "location:gandhinagar",
+      "type": "LocationPreference",
+      "label": {
+        "id": "claim:location-gandhinagar",
+        "value": "Gandhinagar",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-intent-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Prefer Ahmedabad, and would consider Gandhinagar.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "granularity": "city",
+      "countryCode": "IN",
+      "strength": "acceptable",
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-intent-statement",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Prefer Ahmedabad, and would consider Gandhinagar.",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "workMode": {
+    "id": "claim:work-mode",
+    "value": "hybrid",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": {
+          "documentId": "source:synthetic-intent-statement",
+          "page": null,
+          "charStart": null,
+          "charEnd": null,
+          "sourceText": "Hybrid working preferred.",
+          "textDigest": null,
+          "textNormalization": "exact"
+        },
+        "inferringAgent": null
+      }
+    ]
+  },
+  "relocation": {
+    "willingness": "conditional",
+    "conditions": {
+      "id": "claim:relocation-conditions",
+      "value": "Willing to relocate within Gujarat only.",
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-intent-statement",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Willing to relocate within Gujarat only.",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    "targetLocationRefs": [
+      "location:gandhinagar"
+    ],
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": {
+          "documentId": "source:synthetic-intent-statement",
+          "page": null,
+          "charStart": null,
+          "charEnd": null,
+          "sourceText": "Willing to relocate within Gujarat only.",
+          "textDigest": null,
+          "textNormalization": "exact"
+        },
+        "inferringAgent": null
+      }
+    ]
+  },
+  "employmentTypes": [
+    {
+      "id": "employment-type:full-time",
+      "type": "EmploymentTypePreference",
+      "value": "full-time",
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-intent-statement",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Full-time, or a fixed-term contract of at least a year.",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "employment-type:contract",
+      "type": "EmploymentTypePreference",
+      "value": "contract",
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-intent-statement",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Full-time, or a fixed-term contract of at least a year.",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "compensationExpectation": null,
+  "constraints": [
+    {
+      "id": "constraint:field-travel",
+      "type": "IntentConstraint",
+      "kind": "travel",
+      "operator": "maximum",
+      "value": {
+        "id": "claim:constraint-field-travel",
+        "value": "Up to 25 percent field travel",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-intent-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Can do up to 25 percent field travel.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      }
+    }
+  ],
+  "preferences": [
+    {
+      "id": "preference:company-stage",
+      "type": "IntentPreference",
+      "kind": "company-stage",
+      "value": {
+        "id": "claim:preference-company-stage",
+        "value": "Public sector body or established consultancy",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-intent-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Prefer a public sector body or an established consultancy.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      }
+    }
+  ],
+  "taxonomyMappings": [
+    {
+      "id": "taxonomy-mapping:target-occupation-nco",
+      "type": "TaxonomyMapping",
+      "subjectRef": "target:transport-planner",
+      "framework": "NCO-2015",
+      "frameworkVersion": "2015",
+      "mappingStatus": "mapped",
+      "code": "2164",
+      "uri": null,
+      "label": {
+        "id": "claim:target-nco-2164-label",
+        "value": "Town and traffic planners",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-intent-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": null,
+              "textDigest": null,
+              "textNormalization": "unavailable"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "matchType": "close-match",
+      "mappingMethod": "manual-reviewed",
+      "candidates": [],
+      "validity": {
+        "validFrom": "2026-08-01",
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:12:00Z",
+        "lastConfirmedAt": null
+      },
+      "notes": [
+        "The target occupation and the current employment engagement carry the same reviewed NCO-2015 code."
+      ],
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 0.9,
+          "source": {
+            "documentId": "source:synthetic-intent-statement",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "ambiguities": [],
+  "warnings": [
+    {
+      "id": "warning:compensation-not-stated",
+      "type": "Warning",
+      "code": "COMPENSATION_EXPECTATION_NOT_STATED",
+      "severity": "info",
+      "message": "The subject stated no compensation expectation, so the field stays null and no range was inferred.",
+      "relatedRefs": []
+    }
+  ]
+}

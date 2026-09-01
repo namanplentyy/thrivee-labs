@@ -1,0 +1,94 @@
+{
+  "id": "query:availability-and-location",
+  "question": "Is this person open to work, in what mode, where, and from when?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Answered entirely from OpportunityIntent. The CareerProfile is not consulted, which is the point of separating persistent history from temporary market state."
+  ],
+  "steps": [
+    {
+      "name": "lookingStatus",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/lookingStatus/value"
+    },
+    {
+      "name": "availableFrom",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/availability/availableFrom"
+    },
+    {
+      "name": "noticePeriodValue",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/availability/noticePeriod/value"
+    },
+    {
+      "name": "noticePeriodUnit",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/availability/noticePeriod/unit"
+    },
+    {
+      "name": "workMode",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/workMode/value"
+    },
+    {
+      "name": "relocationWillingness",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/relocation/willingness"
+    },
+    {
+      "name": "intentValidUntil",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/validity/validUntil"
+    },
+    {
+      "name": "preferredLocations",
+      "op": "collect",
+      "document": "opportunity-intent",
+      "collection": "preferredLocations",
+      "select": "/label/value"
+    },
+    {
+      "name": "requiredLocations",
+      "op": "collect",
+      "document": "opportunity-intent",
+      "collection": "preferredLocations",
+      "where": {
+        "strength": "required"
+      },
+      "select": "/label/value"
+    },
+    {
+      "name": "employmentTypes",
+      "op": "collect",
+      "document": "opportunity-intent",
+      "collection": "employmentTypes",
+      "select": "/value"
+    }
+  ],
+  "expect": {
+    "lookingStatus": "actively-looking",
+    "availableFrom": "2026-10-01",
+    "noticePeriodValue": 30,
+    "noticePeriodUnit": "day",
+    "workMode": "hybrid",
+    "relocationWillingness": "conditional",
+    "intentValidUntil": "2026-12-31",
+    "preferredLocations": [
+      "Ahmedabad",
+      "Gandhinagar"
+    ],
+    "requiredLocations": [],
+    "employmentTypes": [
+      "full-time",
+      "contract"
+    ]
+  }
+}
