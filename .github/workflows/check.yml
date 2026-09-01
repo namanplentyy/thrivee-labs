@@ -13,8 +13,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # The job name is the status-check context that branch protection requires on
+  # main. Renaming it silently stops main from requiring this check.
   check:
-    name: schemas, examples, rules and queries
+    name: check
     runs-on: ubuntu-latest
 
     steps:
