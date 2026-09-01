@@ -1,0 +1,168 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "Referral",
+  "schemaVersion": "0.3.0",
+  "referralId": "referral:platform-suggested-r-example-path",
+  "parties": [
+    {
+      "id": "party:a-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": "profile:synthetic-transport-planner",
+      "displayName": {
+        "id": "claim:a-example-name",
+        "value": "A. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": null,
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:r-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:r-example-name",
+        "value": "R. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/r-example",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "candidateRef": "profile:synthetic-transport-planner",
+  "referrerRef": "party:r-example",
+  "opportunity": {
+    "id": "opportunity-reference:transport-planner-q4",
+    "type": "OpportunityReference",
+    "opportunityRef": "requisition:2026-q4-transport-planner",
+    "bindingStatus": "deferred-hiring-intent",
+    "label": {
+      "id": "claim:suggested-opportunity-label",
+      "value": "Transport planner requisition, Q4 2026",
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    "organizationRef": null
+  },
+  "origin": "platform-suggested",
+  "relationshipRefs": [
+    "relationship:r-example-taught-a-example"
+  ],
+  "endorsementRefs": [],
+  "availabilityRef": "referral-availability:r-example-2026",
+  "approvals": [
+    {
+      "id": "approval:r-example-referrer",
+      "type": "ReferralApproval",
+      "actorRef": "party:r-example",
+      "role": "referrer",
+      "decision": "pending",
+      "decidedAt": null,
+      "note": null,
+      "provenance": []
+    },
+    {
+      "id": "approval:a-example-candidate-suggested",
+      "type": "ReferralApproval",
+      "actorRef": "party:a-example",
+      "role": "candidate",
+      "decision": "pending",
+      "decidedAt": null,
+      "note": null,
+      "provenance": []
+    }
+  ],
+  "status": "pending",
+  "referredAt": null,
+  "disclosureGrantRefs": [],
+  "validity": {
+    "validFrom": "2026-08-27",
+    "validUntil": "2026-09-30",
+    "observedAt": "2026-08-27T08:00:00Z",
+    "lastConfirmedAt": null
+  },
+  "disclosure": {
+    "id": "disclosure:referral-suggested",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "withheld",
+    "basis": "producer-default",
+    "rules": [],
+    "notes": [
+      "A platform suggestion is a workflow record, not a referral and not an endorsement. Nobody has vouched for anyone here."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-27T08:00:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [],
+  "verifications": [],
+  "ambiguities": [],
+  "warnings": []
+}

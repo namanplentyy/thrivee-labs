@@ -1,0 +1,81 @@
+{
+  "id": "query:referral-or-platform-suggestion",
+  "question": "Is this an actual referral, or merely a platform-suggested potential connection?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "The single most important distinction in the trust layer. Both documents are Referrals and both cite a real relationship. Only one of them represents a person having agreed to anything, and the difference is visible in `origin`, `approvals[].decision`, `status`, `referredAt` and whether any grant exists."
+  ],
+  "steps": [
+    { "name": "actualOrigin", "op": "pointer", "document": "referral-active", "pointer": "/origin" },
+    { "name": "actualStatus", "op": "pointer", "document": "referral-active", "pointer": "/status" },
+    {
+      "name": "actualDecisions",
+      "op": "collect",
+      "document": "referral-active",
+      "collection": "approvals",
+      "select": "/decision"
+    },
+    {
+      "name": "actualReferredAt",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/referredAt"
+    },
+    {
+      "name": "actualGrants",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/disclosureGrantRefs"
+    },
+    {
+      "name": "suggestedOrigin",
+      "op": "pointer",
+      "document": "referral-suggested",
+      "pointer": "/origin"
+    },
+    {
+      "name": "suggestedStatus",
+      "op": "pointer",
+      "document": "referral-suggested",
+      "pointer": "/status"
+    },
+    {
+      "name": "suggestedDecisions",
+      "op": "collect",
+      "document": "referral-suggested",
+      "collection": "approvals",
+      "select": "/decision"
+    },
+    {
+      "name": "suggestedReferredAt",
+      "op": "pointer",
+      "document": "referral-suggested",
+      "pointer": "/referredAt"
+    },
+    {
+      "name": "suggestedGrants",
+      "op": "pointer",
+      "document": "referral-suggested",
+      "pointer": "/disclosureGrantRefs"
+    },
+    {
+      "name": "suggestedEndorsements",
+      "op": "pointer",
+      "document": "referral-suggested",
+      "pointer": "/endorsementRefs"
+    }
+  ],
+  "expect": {
+    "actualOrigin": "employer-requested",
+    "actualStatus": "active",
+    "actualDecisions": ["approved", "approved"],
+    "actualReferredAt": "2026-08-28T14:00:00Z",
+    "actualGrants": ["grant:2026-q4-example-authority"],
+    "suggestedOrigin": "platform-suggested",
+    "suggestedStatus": "pending",
+    "suggestedDecisions": ["pending", "pending"],
+    "suggestedReferredAt": null,
+    "suggestedGrants": [],
+    "suggestedEndorsements": []
+  }
+}

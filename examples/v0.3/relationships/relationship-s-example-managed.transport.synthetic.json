@@ -1,0 +1,288 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "RelationshipAssertion",
+  "schemaVersion": "0.3.0",
+  "relationshipId": "relationship:s-example-managed-a-example",
+  "parties": [
+    {
+      "id": "party:a-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": "profile:synthetic-transport-planner",
+      "displayName": {
+        "id": "claim:a-example-name",
+        "value": "A. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": null,
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:s-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:s-example-name",
+        "value": "S. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/s-example",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:example-authority",
+      "type": "Party",
+      "partyKind": "organization",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:example-authority-name",
+        "value": "Example Metropolitan Development Authority",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/orgs/example-authority",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "partyARef": "party:a-example",
+  "partyBRef": "party:s-example",
+  "relationshipTypes": [
+    "manager"
+  ],
+  "relationshipTypeExtensions": [],
+  "contexts": [
+    {
+      "id": "relationship-context:mobility-cell-reporting",
+      "type": "RelationshipContext",
+      "organizationRef": "party:example-authority",
+      "engagementRef": "engagement:mobility-cell",
+      "from": "2023-08",
+      "to": null,
+      "note": "Direct reporting line in the mobility cell; the engagement is still current.",
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "assertedByRef": "party:a-example",
+  "counterparty": {
+    "status": "confirmed",
+    "confirmedByRef": "party:s-example",
+    "confirmedAt": "2026-08-21T11:05:00Z",
+    "note": null,
+    "provenance": [
+      {
+        "method": "peer-endorsed",
+        "verificationStatus": "peer-endorsed",
+        "confidence": 1,
+        "source": {
+          "documentId": "source:synthetic-counterparty-confirmation",
+          "page": null,
+          "charStart": null,
+          "charEnd": null,
+          "sourceText": null,
+          "textDigest": null,
+          "textNormalization": "unavailable"
+        },
+        "inferringAgent": null
+      }
+    ]
+  },
+  "validity": {
+    "validFrom": "2023-08",
+    "validUntil": null,
+    "observedAt": "2026-08-20T10:00:00Z",
+    "lastConfirmedAt": "2026-08-21T11:05:00Z"
+  },
+  "disclosure": {
+    "id": "disclosure:relationship-s-example",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "requires-grant",
+    "basis": "subject-configured",
+    "rules": [
+      {
+        "id": "disclosure-rule:relationship-sensitive-parties",
+        "type": "DisclosureRule",
+        "selector": {
+          "entityRefs": [],
+          "sensitivities": [
+            "sensitive"
+          ],
+          "collections": []
+        },
+        "visibility": "withheld",
+        "basis": "subject-configured",
+        "note": "The manager's identity is not disclosed before they approve a referral.",
+        "validity": {
+          "validFrom": "2026-08-01",
+          "validUntil": null,
+          "observedAt": "2026-08-20T10:00:00Z",
+          "lastConfirmedAt": null
+        }
+      }
+    ],
+    "notes": [
+      "Confirmed by the counterparty and separately verified by the employer. The two are different states and are recorded separately."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-20T10:00:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [
+    {
+      "id": "source:synthetic-counterparty-confirmation",
+      "type": "SourceDocument",
+      "mediaType": "text/plain",
+      "contentDigest": null,
+      "extractionMethod": "api-import",
+      "pageCount": null,
+      "ingestedAt": "2026-08-21T11:05:00Z"
+    }
+  ],
+  "verifications": [
+    {
+      "id": "verification:reporting-line-confirmed",
+      "type": "Verification",
+      "targetRef": "relationship:s-example-managed-a-example",
+      "verifier": {
+        "name": {
+          "id": "claim:reporting-line-verifier-name",
+          "value": "Example Metropolitan Development Authority",
+          "provenance": [
+            {
+              "method": "institution-issued",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": null,
+              "inferringAgent": null
+            }
+          ]
+        },
+        "kind": "employer",
+        "identifierUri": "https://example.org/orgs/example-authority"
+      },
+      "method": "registry-lookup",
+      "status": "confirmed",
+      "verifiedAt": "2026-08-25",
+      "statement": {
+        "id": "claim:reporting-line-statement",
+        "value": "The employer's directory confirms the reporting line for the stated period.",
+        "provenance": [
+          {
+            "method": "institution-issued",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "supportingArtifactRef": null,
+      "validity": {
+        "validFrom": "2026-08-25",
+        "validUntil": null,
+        "observedAt": "2026-08-25T00:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "institution-issued",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "ambiguities": [],
+  "warnings": []
+}

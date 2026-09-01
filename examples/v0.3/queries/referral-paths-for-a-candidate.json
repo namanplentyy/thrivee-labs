@@ -1,0 +1,52 @@
+{
+  "id": "query:referral-paths-for-a-candidate",
+  "question": "Which relationships exist for this candidate, and which of them are merely claimed rather than confirmed?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Three relationships, three different trust states: one confirmed by the counterparty alone, one confirmed and separately verified by the employer, and one the candidate simply asserted. Collapsing these into a single boolean is exactly what the schema refuses to do."
+  ],
+  "steps": [
+    {
+      "name": "relationships",
+      "op": "across",
+      "documents": ["relationship-taught", "relationship-managed", "relationship-unconfirmed"],
+      "where": { "/partyARef": "party:a-example" },
+      "select": "/relationshipId"
+    },
+    {
+      "name": "counterpartyStates",
+      "op": "across",
+      "documents": ["relationship-taught", "relationship-managed", "relationship-unconfirmed"],
+      "select": "/counterparty/status"
+    },
+    {
+      "name": "primaryTypes",
+      "op": "across",
+      "documents": ["relationship-taught", "relationship-managed", "relationship-unconfirmed"],
+      "select": "/relationshipTypes/0"
+    },
+    {
+      "name": "thirdPartyVerification",
+      "op": "across",
+      "documents": ["relationship-taught", "relationship-managed", "relationship-unconfirmed"],
+      "select": "/verifications/0/status"
+    },
+    {
+      "name": "unconfirmedExtension",
+      "op": "pointer",
+      "document": "relationship-unconfirmed",
+      "pointer": "/relationshipTypeExtensions/0/label/value"
+    }
+  ],
+  "expect": {
+    "relationships": [
+      "relationship:r-example-taught-a-example",
+      "relationship:s-example-managed-a-example",
+      "relationship:a-example-knows-t-example"
+    ],
+    "counterpartyStates": ["confirmed", "confirmed", "unconfirmed"],
+    "primaryTypes": ["professor", "manager", "colleague"],
+    "thirdPartyVerification": [null, "confirmed", null],
+    "unconfirmedExtension": "Co-presenter at a synthetic transport symposium"
+  }
+}

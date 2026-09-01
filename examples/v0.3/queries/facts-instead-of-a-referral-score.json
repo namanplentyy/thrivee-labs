@@ -1,0 +1,103 @@
+{
+  "id": "query:facts-instead-of-a-referral-score",
+  "question": "What can a consumer learn about the strength of this referral path without being handed a score?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Every input a consumer might weigh is present as a fact: relationship type, shared organisation and engagement, duration, recency, whether the counterparty confirmed, whether anybody independently verified, what was endorsed and when, and when the referral was actually transmitted. No aggregate exists. The last step reads a `referralStrength` that is not there and never will be: `additionalProperties: false` means it cannot be added without changing the schema."
+  ],
+  "steps": [
+    {
+      "name": "relationshipType",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/relationshipTypes"
+    },
+    {
+      "name": "sharedOrganization",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/contexts/0/organizationRef"
+    },
+    {
+      "name": "sharedEngagement",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/contexts/0/engagementRef"
+    },
+    {
+      "name": "knownSince",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/contexts/0/from"
+    },
+    {
+      "name": "knownUntil",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/contexts/0/to"
+    },
+    {
+      "name": "counterpartyConfirmed",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/counterparty/status"
+    },
+    {
+      "name": "independentlyVerifiedBy",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/verifications/0/verifier/name/value"
+    },
+    {
+      "name": "verifiedAt",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/verifications/0/verifiedAt"
+    },
+    {
+      "name": "endorsementScope",
+      "op": "pointer",
+      "document": "endorsement-role-performance",
+      "pointer": "/scope"
+    },
+    {
+      "name": "endorsedOn",
+      "op": "pointer",
+      "document": "endorsement-role-performance",
+      "pointer": "/validity/validFrom"
+    },
+    {
+      "name": "referredAt",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/referredAt"
+    },
+    {
+      "name": "referralStrengthScore",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/referralStrength"
+    },
+    {
+      "name": "referrerCredibilityScore",
+      "op": "pointer",
+      "document": "referral-active",
+      "pointer": "/referrerCredibility"
+    }
+  ],
+  "expect": {
+    "relationshipType": ["manager"],
+    "sharedOrganization": "party:example-authority",
+    "sharedEngagement": "engagement:mobility-cell",
+    "knownSince": "2023-08",
+    "knownUntil": null,
+    "counterpartyConfirmed": "confirmed",
+    "independentlyVerifiedBy": "Example Metropolitan Development Authority",
+    "verifiedAt": "2026-08-25",
+    "endorsementScope": "role-performance",
+    "endorsedOn": "2026-08-21",
+    "referredAt": "2026-08-28T14:00:00Z",
+    "referralStrengthScore": null,
+    "referrerCredibilityScore": null
+  }
+}

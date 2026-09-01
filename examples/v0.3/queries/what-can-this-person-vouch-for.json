@@ -1,0 +1,94 @@
+{
+  "id": "query:what-can-this-person-vouch-for",
+  "question": "What exactly is each endorser willing to vouch for, and on what basis?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "An endorsement names what it endorses and what it rests on. 'Can vouch for spatial analysis, on the basis of the coursework I taught and the M.Plan engagement' resolves to identifiers a consumer can follow. A bare 'strong candidate' would be representable as scope `general`, and would resolve to nothing."
+  ],
+  "steps": [
+    {
+      "name": "capabilityScope",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/scope"
+    },
+    {
+      "name": "capabilityTargets",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/targetRefs"
+    },
+    {
+      "name": "capabilityBasis",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/basisRefs"
+    },
+    {
+      "name": "capabilityEndorser",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/endorserRef"
+    },
+    {
+      "name": "capabilitySelfAttested",
+      "op": "pointer",
+      "document": "endorsement-capability",
+      "pointer": "/selfAttested"
+    },
+    {
+      "name": "endorsedCapabilityLabels",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "capabilities",
+      "where": {
+        "id": { "in": ["capability:spatial-analysis", "capability:qgis"] }
+      },
+      "select": "/label/value"
+    },
+    {
+      "name": "endorsedCapabilityKinds",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "capabilities",
+      "where": {
+        "id": { "in": ["capability:spatial-analysis", "capability:qgis"] }
+      },
+      "select": "/capabilityKind"
+    },
+    {
+      "name": "performanceScope",
+      "op": "pointer",
+      "document": "endorsement-role-performance",
+      "pointer": "/scope"
+    },
+    {
+      "name": "performanceTargets",
+      "op": "pointer",
+      "document": "endorsement-role-performance",
+      "pointer": "/targetRefs"
+    },
+    {
+      "name": "performanceBasis",
+      "op": "pointer",
+      "document": "endorsement-role-performance",
+      "pointer": "/basisRefs"
+    }
+  ],
+  "expect": {
+    "capabilityScope": "capability",
+    "capabilityTargets": ["capability:spatial-analysis", "capability:qgis"],
+    "capabilityBasis": ["relationship:r-example-taught-a-example", "engagement:mplan"],
+    "capabilityEndorser": "party:r-example",
+    "capabilitySelfAttested": false,
+    "endorsedCapabilityLabels": ["QGIS", "Spatial analysis"],
+    "endorsedCapabilityKinds": ["tool", "skill"],
+    "performanceScope": "role-performance",
+    "performanceTargets": ["engagement:mobility-cell"],
+    "performanceBasis": [
+      "relationship:s-example-managed-a-example",
+      "engagement:mobility-cell",
+      "artifact:accessibility-report"
+    ]
+  }
+}

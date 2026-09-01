@@ -12,8 +12,10 @@ const transportDescription =
 
 /**
  * Every canonical document schema and the transport schema generated from it.
- * Documents that share a version must keep their shared $defs byte-identical:
- * a single-file structured-output schema cannot use a cross-file $ref.
+ * Documents in the same `defsFamily` must keep their shared $defs byte-identical:
+ * a single-file structured-output schema cannot use a cross-file $ref. The family
+ * spans versions, because the v0.3 trust documents reuse the v0.2 definitions
+ * verbatim rather than forking a second copy of validity, provenance and disclosure.
  */
 const documents = [
   {
@@ -24,15 +26,45 @@ const documents = [
   },
   {
     version: "0.2.0",
+    defsFamily: "career",
     canonical: "career-profile.v0.2.schema.json",
     transport: "career-profile.transport.v0.2.schema.json",
     title: "Thrivee Agent-Native Career Profile transport v0.2",
   },
   {
     version: "0.2.0",
+    defsFamily: "career",
     canonical: "opportunity-intent.v0.2.schema.json",
     transport: "opportunity-intent.transport.v0.2.schema.json",
     title: "Thrivee Agent-Native Opportunity Intent transport v0.2",
+  },
+  {
+    version: "0.3.0",
+    defsFamily: "career",
+    canonical: "relationship-assertion.v0.3.schema.json",
+    transport: "relationship-assertion.transport.v0.3.schema.json",
+    title: "Thrivee Agent-Native Relationship Assertion transport v0.3",
+  },
+  {
+    version: "0.3.0",
+    defsFamily: "career",
+    canonical: "referral-availability.v0.3.schema.json",
+    transport: "referral-availability.transport.v0.3.schema.json",
+    title: "Thrivee Agent-Native Referral Availability transport v0.3",
+  },
+  {
+    version: "0.3.0",
+    defsFamily: "career",
+    canonical: "endorsement.v0.3.schema.json",
+    transport: "endorsement.transport.v0.3.schema.json",
+    title: "Thrivee Agent-Native Endorsement transport v0.3",
+  },
+  {
+    version: "0.3.0",
+    defsFamily: "career",
+    canonical: "referral.v0.3.schema.json",
+    transport: "referral.transport.v0.3.schema.json",
+    title: "Thrivee Agent-Native Referral transport v0.3",
   },
 ];
 
@@ -65,15 +97,16 @@ function toTransportSchema(canonical, document) {
 }
 
 function assertSharedDefinitionParity(canonicalByFile) {
-  const byVersion = new Map();
+  const byFamily = new Map();
   for (const document of documents) {
-    const group = byVersion.get(document.version) ?? [];
+    const family = document.defsFamily ?? document.version;
+    const group = byFamily.get(family) ?? [];
     group.push(document);
-    byVersion.set(document.version, group);
+    byFamily.set(family, group);
   }
 
   const failures = [];
-  for (const [version, group] of byVersion) {
+  for (const [family, group] of byFamily) {
     if (group.length < 2) continue;
     const [first, ...rest] = group;
     const firstDefs = canonicalByFile.get(first.canonical).$defs ?? {};
@@ -85,7 +118,7 @@ function assertSharedDefinitionParity(canonicalByFile) {
           JSON.stringify(firstDefs[name]) !== JSON.stringify(otherDefs[name])
         ) {
           failures.push(
-            `v${version} $defs/${name} differs between ${first.canonical} and ${other.canonical}`,
+            `${family} $defs/${name} differs between ${first.canonical} and ${other.canonical}`,
           );
         }
       }

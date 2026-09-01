@@ -1,0 +1,57 @@
+{
+  "id": "query:how-many-referral-paths-exist",
+  "question": "How many referral paths exist for this candidate, and whose names may the employer agent see?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "This is the privacy property of the whole trust layer, expressed as a query. An employer agent learns that two eligible paths exist. It learns one name, because that referrer opted in with discoverability `named`. The other referrer chose `anonymous-path-only` and stays a count, not a person."
+  ],
+  "steps": [
+    {
+      "name": "eligiblePaths",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "inWindowAt": "2026-09-01",
+      "where": { "/status/value": { "in": ["open", "limited"] } },
+      "select": "/subjectRef"
+    },
+    {
+      "name": "pathCount",
+      "op": "count",
+      "of": "$eligiblePaths"
+    },
+    {
+      "name": "discoverability",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught"],
+      "select": "/discoverability/value"
+    },
+    {
+      "name": "anonymousReferrerName",
+      "op": "disclose",
+      "document": "availability-managed",
+      "entityRef": "party:s-example",
+      "select": "/displayName/value"
+    },
+    {
+      "name": "namedReferrerName",
+      "op": "disclose",
+      "document": "availability-taught",
+      "entityRef": "party:r-example",
+      "select": "/displayName/value"
+    },
+    {
+      "name": "relationshipGraphDefault",
+      "op": "pointer",
+      "document": "relationship-managed",
+      "pointer": "/disclosure/defaultVisibility"
+    }
+  ],
+  "expect": {
+    "eligiblePaths": ["party:s-example", "party:r-example"],
+    "pathCount": 2,
+    "discoverability": ["anonymous-path-only", "named"],
+    "anonymousReferrerName": null,
+    "namedReferrerName": "R. Example",
+    "relationshipGraphDefault": "requires-grant"
+  }
+}

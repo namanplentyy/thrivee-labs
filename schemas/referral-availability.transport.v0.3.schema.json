@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/namanplentyy/thrivee-labs/main/schemas/career-profile.transport.v0.2.schema.json",
-  "title": "Thrivee Agent-Native Career Profile transport v0.2",
+  "$id": "https://raw.githubusercontent.com/namanplentyy/thrivee-labs/main/schemas/referral-availability.transport.v0.3.schema.json",
+  "title": "Thrivee Agent-Native Referral Availability transport v0.3",
   "description": "Structured-output-safe transport form. Convert deterministically to canonical JSON-LD before storage or exchange.",
   "type": "object",
   "additionalProperties": false,
@@ -9,33 +9,55 @@
     "jsonldContext",
     "jsonldType",
     "schemaVersion",
-    "profileId",
-    "freshness",
+    "referralAvailabilityId",
+    "parties",
+    "subjectRef",
+    "status",
+    "discoverability",
+    "scope",
+    "taxonomyMappings",
+    "validity",
     "disclosure",
     "sourceDocuments",
-    "identity",
-    "history",
-    "sharedClaims",
-    "capabilities",
-    "artifacts",
-    "evidence",
     "verifications",
-    "taxonomyMappings",
-    "interests",
-    "languages",
-    "attributes",
     "ambiguities",
     "warnings"
   ],
   "properties": {
     "schemaVersion": {
-      "const": "0.2.0"
+      "const": "0.3.0"
     },
-    "profileId": {
-      "$ref": "#/$defs/profileId"
+    "referralAvailabilityId": {
+      "type": "string",
+      "pattern": "^referral-availability:[A-Za-z0-9][A-Za-z0-9._:-]*$"
     },
-    "freshness": {
-      "$ref": "#/$defs/freshness"
+    "parties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/party"
+      },
+      "minItems": 1
+    },
+    "subjectRef": {
+      "$ref": "#/$defs/partyId"
+    },
+    "status": {
+      "$ref": "#/$defs/availabilityStatusClaim"
+    },
+    "discoverability": {
+      "$ref": "#/$defs/discoverabilityClaim"
+    },
+    "scope": {
+      "$ref": "#/$defs/availabilityScope"
+    },
+    "taxonomyMappings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/taxonomyMapping"
+      }
+    },
+    "validity": {
+      "$ref": "#/$defs/validity"
     },
     "disclosure": {
       "$ref": "#/$defs/disclosure"
@@ -46,70 +68,10 @@
         "$ref": "#/$defs/sourceDocument"
       }
     },
-    "identity": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/identityClaim"
-      }
-    },
-    "history": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/engagement"
-      }
-    },
-    "sharedClaims": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/sharedClaim"
-      }
-    },
-    "capabilities": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/capability"
-      }
-    },
-    "artifacts": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/artifact"
-      }
-    },
-    "evidence": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/evidence"
-      }
-    },
     "verifications": {
       "type": "array",
       "items": {
         "$ref": "#/$defs/verification"
-      }
-    },
-    "taxonomyMappings": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/taxonomyMapping"
-      }
-    },
-    "interests": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/interestClaim"
-      }
-    },
-    "languages": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/languageClaim"
-      }
-    },
-    "attributes": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/personalAttributeClaim"
       }
     },
     "ambiguities": {
@@ -128,7 +90,7 @@
       "$ref": "#/$defs/jsonLdContext"
     },
     "jsonldType": {
-      "const": "CareerProfile"
+      "const": "ReferralAvailability"
     }
   },
   "$defs": {
@@ -283,105 +245,75 @@
         }
       }
     },
-    "artifact": {
-      "description": "A thing that exists and can substantiate a claim. An artifact is declared even when no URI is available, so evidence references always resolve to something inspectable.",
+    "availabilityScope": {
+      "description": "What the referrer is willing to be asked about. An empty scope on a `limited` availability is meaningless, so at least one dimension must be populated.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "organizations",
+        "domains",
+        "careerFamilies",
+        "relationshipRequirements",
+        "note"
+      ],
+      "properties": {
+        "organizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/referralScopeEntry"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/referralScopeEntry"
+          }
+        },
+        "careerFamilies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/referralScopeEntry"
+          }
+        },
+        "relationshipRequirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relationshipTypeValue"
+          },
+          "uniqueItems": true
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "availabilityStatusClaim": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "id",
-        "type",
-        "artifactKind",
-        "title",
-        "description",
-        "uri",
-        "custodian",
-        "sourceDocumentRef",
-        "accessMode",
-        "validity",
+        "value",
         "provenance"
       ],
       "properties": {
         "id": {
-          "type": "string",
-          "pattern": "^artifact:[A-Za-z0-9][A-Za-z0-9._:-]*$"
+          "$ref": "#/$defs/claimId"
         },
-        "type": {
-          "const": "Artifact"
-        },
-        "artifactKind": {
+        "value": {
           "type": "string",
           "enum": [
-            "document",
-            "report",
-            "publication",
-            "repository",
-            "portfolio-item",
-            "dataset",
-            "design",
-            "presentation",
-            "credential-record",
-            "assessment-result",
-            "reference-letter",
-            "media",
-            "other"
+            "open",
+            "limited",
+            "not-available"
           ]
-        },
-        "title": {
-          "$ref": "#/$defs/stringClaim"
-        },
-        "description": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "uri": {
-          "anyOf": [
-            {
-              "type": "string",
-              "format": "uri"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "custodian": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "sourceDocumentRef": {
-          "anyOf": [
-            {
-              "type": "string",
-              "pattern": "^source:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "accessMode": {
-          "type": "string",
-          "enum": [
-            "public",
-            "on-request",
-            "private",
-            "unknown"
-          ]
-        },
-        "validity": {
-          "$ref": "#/$defs/validity"
         },
         "provenance": {
           "type": "array",
@@ -392,226 +324,9 @@
         }
       }
     },
-    "capability": {
-      "description": "One capability collection distinguishes a tool (QGIS), a skill (spatial analysis), domain knowledge, and a demonstrated practice (conducting a transport accessibility analysis). A practice names the tools and skills it exercised through exercisesRefs. contextRefs situate a capability; context is not evidence.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "type",
-        "capabilityKind",
-        "label",
-        "claimStatement",
-        "exercisesRefs",
-        "contextRefs",
-        "evidenceRefs",
-        "proficiency",
-        "lastDemonstratedAt",
-        "validity",
-        "ambiguityRefs"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^capability:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "type": {
-          "const": "Capability"
-        },
-        "capabilityKind": {
-          "type": "string",
-          "enum": [
-            "tool",
-            "skill",
-            "knowledge",
-            "practice"
-          ]
-        },
-        "label": {
-          "$ref": "#/$defs/stringClaim"
-        },
-        "claimStatement": {
-          "$ref": "#/$defs/stringClaim"
-        },
-        "exercisesRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^capability:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "uniqueItems": true
-        },
-        "contextRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(engagement|shared-claim):[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "uniqueItems": true
-        },
-        "evidenceRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^evidence:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "uniqueItems": true
-        },
-        "proficiency": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "lastDemonstratedAt": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/normalizedDate"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "validity": {
-          "$ref": "#/$defs/validity"
-        },
-        "ambiguityRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^ambiguity:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "uniqueItems": true
-        }
-      },
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "claimStatement": {
-                "properties": {
-                  "provenance": {
-                    "contains": {
-                      "properties": {
-                        "method": {
-                          "const": "agent-inferred"
-                        }
-                      },
-                      "required": [
-                        "method"
-                      ]
-                    }
-                  }
-                },
-                "required": [
-                  "provenance"
-                ]
-              }
-            },
-            "required": [
-              "claimStatement"
-            ]
-          },
-          "then": {
-            "properties": {
-              "evidenceRefs": {
-                "minItems": 1
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "lastDemonstratedAt": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "lastDemonstratedAt"
-            ]
-          },
-          "then": {
-            "properties": {
-              "evidenceRefs": {
-                "minItems": 1
-              }
-            }
-          }
-        }
-      ]
-    },
     "claimId": {
       "type": "string",
       "pattern": "^claim:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-    },
-    "credentialDetails": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "credentialName",
-        "fieldOfStudy",
-        "grade",
-        "ncrfCredits",
-        "nsqfLevel"
-      ],
-      "properties": {
-        "credentialName": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "fieldOfStudy": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "grade": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "ncrfCredits": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/numberClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "nsqfLevel": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/numberClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      }
     },
     "disclosure": {
       "description": "What an agent may discover without permission versus what requires an explicit grant. This object never records requester identities, marketplace transactions, or consent history; candidate-authorized disclosure to a named requester is the separate future DisclosureGrant contract.",
@@ -803,97 +518,8 @@
         }
       ]
     },
-    "engagement": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "type",
-        "engagementType",
-        "organization",
-        "roleOrProgram",
-        "location",
-        "periods",
-        "descriptions",
-        "credential",
-        "ambiguityRefs",
-        "provenance"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^engagement:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "type": {
-          "const": "Engagement"
-        },
-        "engagementType": {
-          "$ref": "#/$defs/engagementTypeClaim"
-        },
-        "organization": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "roleOrProgram": {
-          "$ref": "#/$defs/stringClaim"
-        },
-        "location": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/stringClaim"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "periods": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/temporalPeriod"
-          },
-          "minItems": 1
-        },
-        "descriptions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/stringClaim"
-          }
-        },
-        "credential": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/credentialDetails"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "ambiguityRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^ambiguity:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "uniqueItems": true
-        },
-        "provenance": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/provenance"
-          },
-          "minItems": 1
-        }
-      }
-    },
-    "engagementTypeClaim": {
+    "discoverabilityClaim": {
+      "description": "How much an employer agent may learn before the referrer has approved anything. `anonymous-path-only` lets a consumer learn that a referral path exists without learning who is on it, which is what keeps the relationship graph from becoming a machine-readable directory of people's professional networks.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -908,21 +534,9 @@
         "value": {
           "type": "string",
           "enum": [
-            "employment",
-            "education",
-            "internship",
-            "project",
-            "training",
-            "certification",
-            "volunteer",
-            "award",
-            "publication",
-            "conference",
-            "membership",
-            "career-break",
-            "informal-work",
-            "family-business",
-            "other"
+            "none",
+            "anonymous-path-only",
+            "named"
           ]
         },
         "provenance": {
@@ -938,214 +552,10 @@
       "type": "string",
       "pattern": "^[a-z][a-z0-9-]*:[A-Za-z0-9][A-Za-z0-9._:-]*$"
     },
-    "evidence": {
-      "description": "A first-class directional edge from a capability claim to what supports it. Verification of an evidence record is a separate Verification whose targetRef points back at it.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "type",
-        "relation",
-        "subjectRef",
-        "targetRef",
-        "notes",
-        "validity",
-        "provenance"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^evidence:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "type": {
-          "const": "Evidence"
-        },
-        "relation": {
-          "type": "string",
-          "enum": [
-            "DemonstratedIn",
-            "LearnedIn",
-            "ProducedIn",
-            "AssessedBy",
-            "SupportedBy",
-            "MentionedIn"
-          ]
-        },
-        "subjectRef": {
-          "type": "string",
-          "pattern": "^capability:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "targetRef": {
-          "type": "string",
-          "pattern": "^(engagement|shared-claim|artifact|source|period):[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "notes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "validity": {
-          "$ref": "#/$defs/validity"
-        },
-        "provenance": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/provenance"
-          },
-          "minItems": 1
-        }
-      }
-    },
-    "freshness": {
-      "description": "Factual recency metadata only. lastSubjectConfirmedAt is the latest validity.lastConfirmedAt in the document and lastVerificationAt is the latest confirmed verification date; both are null when none exists. This is deliberately not a profile quality, completeness, or strength score.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "profileGeneratedAt",
-        "lastSourceIngestedAt",
-        "lastSubjectConfirmedAt",
-        "lastVerificationAt",
-        "staleAfter"
-      ],
-      "properties": {
-        "profileGeneratedAt": {
-          "$ref": "#/$defs/instant"
-        },
-        "lastSourceIngestedAt": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/instant"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "lastSubjectConfirmedAt": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/instant"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "lastVerificationAt": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/instant"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "staleAfter": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/normalizedDate"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      }
-    },
-    "identityClaim": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "type",
-        "kind",
-        "value",
-        "sensitivity",
-        "validity"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^identity:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "type": {
-          "const": "IdentityClaim"
-        },
-        "kind": {
-          "type": "string",
-          "enum": [
-            "display-name",
-            "current-location",
-            "contact-route",
-            "stable-id"
-          ]
-        },
-        "value": {
-          "$ref": "#/$defs/stringClaim"
-        },
-        "sensitivity": {
-          "type": "string",
-          "enum": [
-            "standard",
-            "sensitive",
-            "highly-sensitive"
-          ]
-        },
-        "validity": {
-          "$ref": "#/$defs/validity"
-        }
-      }
-    },
     "instant": {
       "description": "A calendar date, or a UTC date-time, at which something was observed or recorded.",
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)?$"
-    },
-    "interestClaim": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "type",
-        "kind",
-        "label",
-        "contextRefs"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^interest:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "type": {
-          "const": "Interest"
-        },
-        "kind": {
-          "type": "string",
-          "enum": [
-            "field",
-            "industry",
-            "role",
-            "technology",
-            "activity",
-            "subject",
-            "other"
-          ]
-        },
-        "label": {
-          "$ref": "#/$defs/stringClaim"
-        },
-        "contextRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^(engagement|shared-claim):[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "uniqueItems": true
-        }
-      }
     },
     "jsonLdContext": {
       "description": "Inline transport-safe context. `id` and `type` are JSON-LD keyword aliases, so every identified entity is a real JSON-LD node rather than an anonymous nested object. contexts/career-v0.2.context.jsonld carries the full term definitions.",
@@ -1180,28 +590,51 @@
         }
       }
     },
-    "languageClaim": {
+    "normalizedDate": {
+      "type": "string",
+      "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$"
+    },
+    "party": {
+      "description": "A person or organisation named by a trust document. A party is a routing handle, not a career record: it carries no history, capabilities or evidence. A referrer who has never created a CareerProfile is represented by a party whose profileRef is null and whose identifierUri routes to them, so no fabricated profile is required. At least one of profileRef, identifierUri or displayName must be present.",
       "type": "object",
       "additionalProperties": false,
       "required": [
         "id",
         "type",
-        "language",
-        "proficiency",
-        "modes"
+        "partyKind",
+        "profileRef",
+        "displayName",
+        "identifierUri",
+        "identityAssurance",
+        "sensitivity",
+        "validity",
+        "provenance"
       ],
       "properties": {
         "id": {
-          "type": "string",
-          "pattern": "^language:[A-Za-z0-9][A-Za-z0-9._:-]*$"
+          "$ref": "#/$defs/partyId"
         },
         "type": {
-          "const": "LanguageClaim"
+          "const": "Party"
         },
-        "language": {
-          "$ref": "#/$defs/stringClaim"
+        "partyKind": {
+          "type": "string",
+          "enum": [
+            "person",
+            "organization"
+          ]
         },
-        "proficiency": {
+        "profileRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/profileId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "displayName": {
           "anyOf": [
             {
               "$ref": "#/$defs/stringClaim"
@@ -1211,75 +644,27 @@
             }
           ]
         },
-        "modes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "reading",
-              "writing",
-              "speaking",
-              "listening"
-            ]
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "normalizedDate": {
-      "type": "string",
-      "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$"
-    },
-    "numberClaim": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "value",
-        "provenance"
-      ],
-      "properties": {
-        "id": {
-          "$ref": "#/$defs/claimId"
+        "identifierUri": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
-        "value": {
-          "type": "number",
-          "minimum": 0
-        },
-        "provenance": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/provenance"
-          },
-          "minItems": 1
-        }
-      }
-    },
-    "personalAttributeClaim": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "type",
-        "kind",
-        "value",
-        "sensitivity",
-        "validity"
-      ],
-      "properties": {
-        "id": {
+        "identityAssurance": {
           "type": "string",
-          "pattern": "^attribute:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "type": {
-          "const": "PersonalAttribute"
-        },
-        "kind": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9-]*$"
-        },
-        "value": {
-          "$ref": "#/$defs/stringClaim"
+          "enum": [
+            "unverified",
+            "self-asserted",
+            "contact-verified",
+            "domain-verified",
+            "institution-verified",
+            "platform-verified"
+          ]
         },
         "sensitivity": {
           "type": "string",
@@ -1291,8 +676,42 @@
         },
         "validity": {
           "$ref": "#/$defs/validity"
+        },
+        "provenance": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/provenance"
+          },
+          "minItems": 1
         }
-      }
+      },
+      "anyOf": [
+        {
+          "properties": {
+            "profileRef": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "properties": {
+            "identifierUri": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "properties": {
+            "displayName": {
+              "type": "object"
+            }
+          }
+        }
+      ]
+    },
+    "partyId": {
+      "type": "string",
+      "pattern": "^party:[A-Za-z0-9][A-Za-z0-9._:-]*$"
     },
     "profileId": {
       "type": "string",
@@ -1383,108 +802,63 @@
         }
       ]
     },
-    "sharedClaim": {
+    "referralScopeEntry": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "id",
         "type",
         "kind",
-        "statement",
-        "candidateEngagementRefs",
-        "resolutionStatus",
-        "resolvedEngagementRefs",
-        "ambiguityRef"
+        "label",
+        "organizationRef"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "pattern": "^shared-claim:[A-Za-z0-9][A-Za-z0-9._:-]*$"
+          "pattern": "^referral-scope:[A-Za-z0-9][A-Za-z0-9._:-]*$"
         },
         "type": {
-          "const": "SharedClaim"
+          "const": "ReferralScopeEntry"
         },
         "kind": {
           "type": "string",
           "enum": [
-            "description",
-            "responsibility",
-            "achievement",
-            "association",
-            "other"
+            "organization",
+            "domain",
+            "career-family"
           ]
         },
-        "statement": {
+        "label": {
           "$ref": "#/$defs/stringClaim"
         },
-        "candidateEngagementRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^engagement:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "minItems": 2,
-          "uniqueItems": true
-        },
-        "resolutionStatus": {
-          "type": "string",
-          "enum": [
-            "unresolved",
-            "resolved"
+        "organizationRef": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/partyId"
+            },
+            {
+              "type": "null"
+            }
           ]
-        },
-        "resolvedEngagementRefs": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^engagement:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-          },
-          "uniqueItems": true
-        },
-        "ambiguityRef": {
-          "type": "string",
-          "pattern": "^ambiguity:[A-Za-z0-9][A-Za-z0-9._:-]*$"
         }
-      },
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "resolutionStatus": {
-                "const": "unresolved"
-              }
-            },
-            "required": [
-              "resolutionStatus"
-            ]
-          },
-          "then": {
-            "properties": {
-              "resolvedEngagementRefs": {
-                "maxItems": 0
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "resolutionStatus": {
-                "const": "resolved"
-              }
-            },
-            "required": [
-              "resolutionStatus"
-            ]
-          },
-          "then": {
-            "properties": {
-              "resolvedEngagementRefs": {
-                "minItems": 1
-              }
-            }
-          }
-        }
+      }
+    },
+    "relationshipTypeValue": {
+      "description": "The factual basis of a relationship. `other` is not a dumping ground: it requires at least one relationshipTypeExtension naming what the relationship actually was.",
+      "type": "string",
+      "enum": [
+        "manager",
+        "direct-report",
+        "colleague",
+        "project-collaborator",
+        "professor",
+        "student",
+        "intern-supervisor",
+        "classmate",
+        "alumni-connection",
+        "client",
+        "mentor",
+        "other"
       ]
     },
     "sourceDocument": {
@@ -2038,248 +1412,6 @@
               },
               "matchType": {
                 "const": "no-match"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "temporalAlternative": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "start",
-        "end",
-        "precision",
-        "confidence",
-        "note"
-      ],
-      "properties": {
-        "start": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/normalizedDate"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "end": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/normalizedDate"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "precision": {
-          "type": "string",
-          "enum": [
-            "day",
-            "month",
-            "year",
-            "mixed",
-            "unknown"
-          ]
-        },
-        "confidence": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "note": {
-          "type": "string",
-          "minLength": 1
-        }
-      }
-    },
-    "temporalPeriod": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "id",
-        "type",
-        "raw",
-        "start",
-        "end",
-        "precision",
-        "isCurrent",
-        "currentStatusBasis",
-        "interpretationStatus",
-        "occurrenceLabel",
-        "alternatives",
-        "notes",
-        "provenance"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "pattern": "^period:[A-Za-z0-9][A-Za-z0-9._:-]*$"
-        },
-        "type": {
-          "const": "TemporalPeriod"
-        },
-        "raw": {
-          "anyOf": [
-            {
-              "type": "string",
-              "minLength": 1
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "start": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/normalizedDate"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "end": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/normalizedDate"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "precision": {
-          "type": "string",
-          "enum": [
-            "day",
-            "month",
-            "year",
-            "mixed",
-            "unknown"
-          ]
-        },
-        "isCurrent": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "currentStatusBasis": {
-          "type": "string",
-          "enum": [
-            "explicit-ongoing",
-            "explicit-completed",
-            "source-range-ended",
-            "unstated",
-            "not-applicable"
-          ]
-        },
-        "interpretationStatus": {
-          "type": "string",
-          "enum": [
-            "exact",
-            "normalized",
-            "ambiguous",
-            "unknown"
-          ]
-        },
-        "occurrenceLabel": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "alternatives": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/temporalAlternative"
-          }
-        },
-        "notes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "provenance": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/provenance"
-          },
-          "minItems": 1
-        }
-      },
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "isCurrent": {
-                "const": true
-              }
-            },
-            "required": [
-              "isCurrent"
-            ]
-          },
-          "then": {
-            "properties": {
-              "currentStatusBasis": {
-                "const": "explicit-ongoing"
-              },
-              "end": {
-                "type": "null"
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "isCurrent": {
-                "const": false
-              }
-            },
-            "required": [
-              "isCurrent"
-            ]
-          },
-          "then": {
-            "properties": {
-              "currentStatusBasis": {
-                "type": "string",
-                "enum": [
-                  "explicit-completed",
-                  "source-range-ended"
-                ]
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "isCurrent": {
-                "type": "null"
-              }
-            },
-            "required": [
-              "isCurrent"
-            ]
-          },
-          "then": {
-            "properties": {
-              "currentStatusBasis": {
-                "type": "string",
-                "enum": [
-                  "unstated",
-                  "not-applicable"
-                ]
               }
             }
           }

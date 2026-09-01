@@ -1,0 +1,84 @@
+{
+  "id": "query:has-everyone-approved",
+  "question": "Has the candidate approved this referral? Has the referrer?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Approvals are individually attributed and individually dated, so the question is answered per actor rather than by reading one aggregate flag. The employer is deliberately absent: employer interest is the demand event, not an approval."
+  ],
+  "steps": [
+    {
+      "name": "referrerDecision",
+      "op": "collect",
+      "document": "referral-active",
+      "collection": "approvals",
+      "where": { "role": "referrer" },
+      "select": "/decision"
+    },
+    {
+      "name": "referrerDecidedAt",
+      "op": "collect",
+      "document": "referral-active",
+      "collection": "approvals",
+      "where": { "role": "referrer" },
+      "select": "/decidedAt"
+    },
+    {
+      "name": "referrerActor",
+      "op": "collect",
+      "document": "referral-active",
+      "collection": "approvals",
+      "where": { "role": "referrer" },
+      "select": "/actorRef"
+    },
+    {
+      "name": "candidateDecision",
+      "op": "collect",
+      "document": "referral-active",
+      "collection": "approvals",
+      "where": { "role": "candidate" },
+      "select": "/decision"
+    },
+    {
+      "name": "candidateDecidedAt",
+      "op": "collect",
+      "document": "referral-active",
+      "collection": "approvals",
+      "where": { "role": "candidate" },
+      "select": "/decidedAt"
+    },
+    {
+      "name": "approvingRoles",
+      "op": "collect",
+      "document": "referral-active",
+      "collection": "approvals",
+      "where": { "decision": "approved" },
+      "select": "/role"
+    },
+    {
+      "name": "suggestedReferrerDecision",
+      "op": "collect",
+      "document": "referral-suggested",
+      "collection": "approvals",
+      "where": { "role": "referrer" },
+      "select": "/decision"
+    },
+    {
+      "name": "suggestedApprovingRoles",
+      "op": "collect",
+      "document": "referral-suggested",
+      "collection": "approvals",
+      "where": { "decision": "approved" },
+      "select": "/role"
+    }
+  ],
+  "expect": {
+    "referrerDecision": ["approved"],
+    "referrerDecidedAt": ["2026-08-28T11:00:00Z"],
+    "referrerActor": ["party:s-example"],
+    "candidateDecision": ["approved"],
+    "candidateDecidedAt": ["2026-08-28T13:20:00Z"],
+    "approvingRoles": ["referrer", "candidate"],
+    "suggestedReferrerDecision": ["pending"],
+    "suggestedApprovingRoles": []
+  }
+}

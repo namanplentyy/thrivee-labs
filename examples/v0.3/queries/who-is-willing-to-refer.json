@@ -1,0 +1,62 @@
+{
+  "id": "query:who-is-willing-to-refer",
+  "question": "Which people are currently willing to act as referrers in transport planning?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "Willingness is its own document. Having a relationship with someone does not put them in this answer, and a lapsed availability drops out of it even though the document still says `open` -- expiry is evaluated against the caller's date, never asserted by the document."
+  ],
+  "steps": [
+    {
+      "name": "willingAvailabilities",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "inWindowAt": "2026-09-01",
+      "where": {
+        "/status/value": { "in": ["open", "limited"] },
+        "/scope/domains": {
+          "contains": "Urban transport planning",
+          "select": "/label/value"
+        }
+      },
+      "select": "/referralAvailabilityId"
+    },
+    {
+      "name": "statuses",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "inWindowAt": "2026-09-01",
+      "select": "/status/value"
+    },
+    {
+      "name": "relationshipRequirements",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught"],
+      "select": "/scope/relationshipRequirements"
+    },
+    {
+      "name": "lapsedIsStillInWindow",
+      "op": "inWindow",
+      "document": "availability-lapsed",
+      "asOf": "2026-09-01"
+    },
+    {
+      "name": "lapsedStillSaysOpen",
+      "op": "pointer",
+      "document": "availability-lapsed",
+      "pointer": "/status/value"
+    }
+  ],
+  "expect": {
+    "willingAvailabilities": [
+      "referral-availability:s-example-2026",
+      "referral-availability:r-example-2026"
+    ],
+    "statuses": ["limited", "open"],
+    "relationshipRequirements": [
+      ["manager", "direct-report"],
+      ["professor", "student"]
+    ],
+    "lapsedIsStillInWindow": false,
+    "lapsedStillSaysOpen": "open"
+  }
+}

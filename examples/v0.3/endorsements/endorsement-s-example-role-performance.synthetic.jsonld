@@ -1,0 +1,177 @@
+{
+  "@context": {
+    "@vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "@type": "Endorsement",
+  "schemaVersion": "0.3.0",
+  "endorsementId": "endorsement:s-example-role-performance",
+  "parties": [
+    {
+      "id": "party:a-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": "profile:synthetic-transport-planner",
+      "displayName": {
+        "id": "claim:a-example-name",
+        "value": "A. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": null,
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:s-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:s-example-name",
+        "value": "S. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/s-example",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:example-authority",
+      "type": "Party",
+      "partyKind": "organization",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:example-authority-name",
+        "value": "Example Metropolitan Development Authority",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/orgs/example-authority",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "endorserRef": "party:s-example",
+  "subjectRef": "profile:synthetic-transport-planner",
+  "scope": "role-performance",
+  "targetRefs": [
+    "engagement:mobility-cell"
+  ],
+  "basisRefs": [
+    "relationship:s-example-managed-a-example",
+    "engagement:mobility-cell",
+    "artifact:accessibility-report"
+  ],
+  "statement": {
+    "id": "claim:s-example-endorsement-statement",
+    "value": "Managed the work directly and signed off the ward-level accessibility report; can vouch for delivery on that engagement.",
+    "provenance": [
+      {
+        "method": "peer-endorsed",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": null,
+        "inferringAgent": null
+      }
+    ]
+  },
+  "selfAttested": false,
+  "validity": {
+    "validFrom": "2026-08-21",
+    "validUntil": "2027-08-21",
+    "observedAt": "2026-08-21T11:10:00Z",
+    "lastConfirmedAt": "2026-08-21T11:10:00Z"
+  },
+  "disclosure": {
+    "id": "disclosure:endorsement-s-example",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "requires-grant",
+    "basis": "subject-configured",
+    "rules": [],
+    "notes": [
+      "The endorsement states what it is based on, so a consumer can weigh it without a score being supplied."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-21T11:10:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [],
+  "verifications": [],
+  "ambiguities": [],
+  "warnings": []
+}

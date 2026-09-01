@@ -1,0 +1,258 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "ReferralAvailability",
+  "schemaVersion": "0.3.0",
+  "referralAvailabilityId": "referral-availability:s-example-2026",
+  "parties": [
+    {
+      "id": "party:s-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:s-example-name",
+        "value": "S. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/s-example",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:example-authority",
+      "type": "Party",
+      "partyKind": "organization",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:example-authority-name",
+        "value": "Example Metropolitan Development Authority",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/orgs/example-authority",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "subjectRef": "party:s-example",
+  "status": {
+    "id": "claim:s-example-availability-status",
+    "value": "limited",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": null,
+        "inferringAgent": null
+      }
+    ]
+  },
+  "discoverability": {
+    "id": "claim:s-example-discoverability",
+    "value": "anonymous-path-only",
+    "provenance": [
+      {
+        "method": "user-entered",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": null,
+        "inferringAgent": null
+      }
+    ]
+  },
+  "scope": {
+    "organizations": [
+      {
+        "id": "referral-scope:example-authority",
+        "type": "ReferralScopeEntry",
+        "kind": "organization",
+        "label": {
+          "id": "claim:scope-example-authority-label",
+          "value": "Example Metropolitan Development Authority",
+          "provenance": [
+            {
+              "method": "user-entered",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": null,
+              "inferringAgent": null
+            }
+          ]
+        },
+        "organizationRef": "party:example-authority"
+      }
+    ],
+    "domains": [
+      {
+        "id": "referral-scope:urban-transport",
+        "type": "ReferralScopeEntry",
+        "kind": "domain",
+        "label": {
+          "id": "claim:scope-urban-transport-label",
+          "value": "Urban transport planning",
+          "provenance": [
+            {
+              "method": "user-entered",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": null,
+              "inferringAgent": null
+            }
+          ]
+        },
+        "organizationRef": null
+      }
+    ],
+    "careerFamilies": [
+      {
+        "id": "referral-scope:town-and-traffic-planning",
+        "type": "ReferralScopeEntry",
+        "kind": "career-family",
+        "label": {
+          "id": "claim:scope-town-and-traffic-planning-label",
+          "value": "Town and traffic planners",
+          "provenance": [
+            {
+              "method": "user-entered",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": null,
+              "inferringAgent": null
+            }
+          ]
+        },
+        "organizationRef": null
+      }
+    ],
+    "relationshipRequirements": [
+      "manager",
+      "direct-report"
+    ],
+    "note": "Willing to be asked only about people who reported into the same team."
+  },
+  "taxonomyMappings": [
+    {
+      "id": "taxonomy-mapping:s-example-scope-nco",
+      "type": "TaxonomyMapping",
+      "subjectRef": "referral-scope:town-and-traffic-planning",
+      "framework": "NCO-2015",
+      "frameworkVersion": "2015",
+      "mappingStatus": "mapped",
+      "code": "2164",
+      "uri": null,
+      "label": {
+        "id": "claim:s-example-scope-nco-label",
+        "value": "Town and traffic planners",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "matchType": "exact-match",
+      "mappingMethod": "manual-reviewed",
+      "candidates": [],
+      "validity": {
+        "validFrom": "2026-08-01",
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "notes": [
+        "The referrer's scope carries the same reviewed NCO-2015 code as the candidate's current engagement, so the two join without free-text matching."
+      ],
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 0.9,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "validity": {
+    "validFrom": "2026-08-01",
+    "validUntil": "2026-12-31",
+    "observedAt": "2026-08-20T10:00:00Z",
+    "lastConfirmedAt": "2026-08-20T10:00:00Z"
+  },
+  "disclosure": {
+    "id": "disclosure:availability-s-example",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "requires-grant",
+    "basis": "subject-configured",
+    "rules": [],
+    "notes": [
+      "Willingness is discoverable as a path, but the referrer's name is not: discoverability is anonymous-path-only."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-20T10:00:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [],
+  "verifications": [],
+  "ambiguities": [],
+  "warnings": []
+}

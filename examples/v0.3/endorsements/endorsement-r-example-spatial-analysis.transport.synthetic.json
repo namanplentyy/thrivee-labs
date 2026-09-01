@@ -1,0 +1,266 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "Endorsement",
+  "schemaVersion": "0.3.0",
+  "endorsementId": "endorsement:r-example-spatial-analysis",
+  "parties": [
+    {
+      "id": "party:a-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": "profile:synthetic-transport-planner",
+      "displayName": {
+        "id": "claim:a-example-name",
+        "value": "A. Example",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": null,
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:r-example",
+      "type": "Party",
+      "partyKind": "person",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:r-example-name",
+        "value": "R. Example",
+        "provenance": [
+          {
+            "method": "institution-issued",
+            "verificationStatus": "institution-verified",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-endorsement-statement",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": null,
+              "textDigest": null,
+              "textNormalization": "unavailable"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/people/r-example",
+      "identityAssurance": "domain-verified",
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "institution-issued",
+          "verificationStatus": "institution-verified",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-endorsement-statement",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "party:example-institute",
+      "type": "Party",
+      "partyKind": "organization",
+      "profileRef": null,
+      "displayName": {
+        "id": "claim:example-institute-name",
+        "value": "Example Institute of Technology",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "identifierUri": "https://example.org/orgs/example-institute",
+      "identityAssurance": "self-asserted",
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-20T10:00:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "endorserRef": "party:r-example",
+  "subjectRef": "profile:synthetic-transport-planner",
+  "scope": "capability",
+  "targetRefs": [
+    "capability:spatial-analysis",
+    "capability:qgis"
+  ],
+  "basisRefs": [
+    "relationship:r-example-taught-a-example",
+    "engagement:mplan"
+  ],
+  "statement": {
+    "id": "claim:r-example-endorsement-statement",
+    "value": "Taught the GIS and spatial analysis coursework and supervised the term project; can vouch for the analytical work on that basis.",
+    "provenance": [
+      {
+        "method": "peer-endorsed",
+        "verificationStatus": "self-attested",
+        "confidence": 1,
+        "source": {
+          "documentId": "source:synthetic-endorsement-statement",
+          "page": null,
+          "charStart": null,
+          "charEnd": null,
+          "sourceText": null,
+          "textDigest": null,
+          "textNormalization": "unavailable"
+        },
+        "inferringAgent": null
+      }
+    ]
+  },
+  "selfAttested": false,
+  "validity": {
+    "validFrom": "2026-08-22",
+    "validUntil": null,
+    "observedAt": "2026-08-22T09:40:00Z",
+    "lastConfirmedAt": "2026-08-22T09:40:00Z"
+  },
+  "disclosure": {
+    "id": "disclosure:endorsement-r-example",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "requires-grant",
+    "basis": "subject-configured",
+    "rules": [],
+    "notes": [
+      "The endorsement is readable only under a grant, even though the endorser is discoverable through their own referral availability."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-22T09:40:00Z",
+      "lastConfirmedAt": null
+    }
+  },
+  "sourceDocuments": [
+    {
+      "id": "source:synthetic-endorsement-statement",
+      "type": "SourceDocument",
+      "mediaType": "text/plain",
+      "contentDigest": null,
+      "extractionMethod": "user-entry",
+      "pageCount": null,
+      "ingestedAt": "2026-08-22T09:40:00Z"
+    }
+  ],
+  "verifications": [
+    {
+      "id": "verification:r-example-identity",
+      "type": "Verification",
+      "targetRef": "party:r-example",
+      "verifier": {
+        "name": {
+          "id": "claim:r-example-verifier-name",
+          "value": "Example Institute of Technology",
+          "provenance": [
+            {
+              "method": "institution-issued",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": null,
+              "inferringAgent": null
+            }
+          ]
+        },
+        "kind": "issuing-institution",
+        "identifierUri": "https://example.org/orgs/example-institute"
+      },
+      "method": "registry-lookup",
+      "status": "confirmed",
+      "verifiedAt": "2026-08-22",
+      "statement": {
+        "id": "claim:r-example-identity-statement",
+        "value": "The endorser holds a current faculty address in the institution's directory.",
+        "provenance": [
+          {
+            "method": "institution-issued",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": null,
+            "inferringAgent": null
+          }
+        ]
+      },
+      "supportingArtifactRef": null,
+      "validity": {
+        "validFrom": "2026-08-22",
+        "validUntil": null,
+        "observedAt": "2026-08-22T09:40:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "institution-issued",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": null,
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "ambiguities": [],
+  "warnings": []
+}

@@ -1,0 +1,59 @@
+{
+  "id": "query:absence-is-not-a-refusal",
+  "question": "Has anyone stated that they are not available to refer, and what does it mean when no availability document exists at all?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "The v0.2 rule that absence is absence carries into the trust layer. Nobody here has stated `not-available`. Two parties simply have no availability document, which is not a refusal, not a `not-available` status, and not something an agent may fill in. A third has one whose window closed, which is a fourth distinct state again."
+  ],
+  "steps": [
+    {
+      "name": "statedRefusals",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "where": { "/status/value": "not-available" },
+      "select": "/referralAvailabilityId"
+    },
+    {
+      "name": "availabilityForTheOrganisation",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "where": { "/subjectRef": "party:example-authority" },
+      "select": "/referralAvailabilityId"
+    },
+    {
+      "name": "availabilityForTheCandidate",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "where": { "/subjectRef": "party:a-example" },
+      "select": "/referralAvailabilityId"
+    },
+    {
+      "name": "lapsedContactStatedStatus",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "where": { "/subjectRef": "party:t-example" },
+      "select": "/status/value"
+    },
+    {
+      "name": "lapsedContactCurrentlyInWindow",
+      "op": "inWindow",
+      "document": "availability-lapsed",
+      "asOf": "2026-09-01"
+    },
+    {
+      "name": "everyoneCurrentlyWilling",
+      "op": "across",
+      "documents": ["availability-managed", "availability-taught", "availability-lapsed"],
+      "inWindowAt": "2026-09-01",
+      "select": "/subjectRef"
+    }
+  ],
+  "expect": {
+    "statedRefusals": [],
+    "availabilityForTheOrganisation": [],
+    "availabilityForTheCandidate": [],
+    "lapsedContactStatedStatus": ["open"],
+    "lapsedContactCurrentlyInWindow": false,
+    "everyoneCurrentlyWilling": ["party:s-example", "party:r-example"]
+  }
+}
