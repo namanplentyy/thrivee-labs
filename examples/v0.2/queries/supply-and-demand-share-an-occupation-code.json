@@ -1,0 +1,79 @@
+{
+  "id": "query:supply-and-demand-share-an-occupation-code",
+  "question": "Do this person's current occupation and their target occupation carry the same external code?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "This is the join the future RoleProfile and HiringIntent documents will use. Nothing here ranks or scores the match; it only shows that both sides carry comparable structure."
+  ],
+  "steps": [
+    {
+      "name": "profileOccupationCodes",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "framework": "NCO-2015",
+        "mappingStatus": "mapped"
+      },
+      "select": "/code"
+    },
+    {
+      "name": "profileOccupationSubjects",
+      "op": "collect",
+      "document": "career-profile",
+      "collection": "taxonomyMappings",
+      "where": {
+        "framework": "NCO-2015",
+        "mappingStatus": "mapped"
+      },
+      "select": "/subjectRef"
+    },
+    {
+      "name": "intentTargetCodes",
+      "op": "collect",
+      "document": "opportunity-intent",
+      "collection": "taxonomyMappings",
+      "where": {
+        "framework": "NCO-2015",
+        "mappingStatus": "mapped"
+      },
+      "select": "/code"
+    },
+    {
+      "name": "intentTargetSubjects",
+      "op": "collect",
+      "document": "opportunity-intent",
+      "collection": "taxonomyMappings",
+      "where": {
+        "framework": "NCO-2015",
+        "mappingStatus": "mapped"
+      },
+      "select": "/subjectRef"
+    },
+    {
+      "name": "targetRoles",
+      "op": "collect",
+      "document": "opportunity-intent",
+      "collection": "targetRoles",
+      "select": "/value/value"
+    }
+  ],
+  "expect": {
+    "profileOccupationCodes": [
+      "2164"
+    ],
+    "profileOccupationSubjects": [
+      "engagement:mobility-cell"
+    ],
+    "intentTargetCodes": [
+      "2164"
+    ],
+    "intentTargetSubjects": [
+      "target:transport-planner"
+    ],
+    "targetRoles": [
+      "Transport planner",
+      "Urban mobility and transport planning"
+    ]
+  }
+}

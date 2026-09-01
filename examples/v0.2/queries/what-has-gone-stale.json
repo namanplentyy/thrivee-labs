@@ -1,0 +1,55 @@
+{
+  "id": "query:what-has-gone-stale",
+  "question": "Which recorded state has expired, evaluated at an explicit date rather than the system clock?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "The same documents give different answers at different dates, and neither answer depends on when the query is run."
+  ],
+  "steps": [
+    {
+      "name": "intentExpiredInSeptember",
+      "op": "expired",
+      "document": "opportunity-intent"
+    },
+    {
+      "name": "intentExpiredInJanuary",
+      "op": "expired",
+      "document": "opportunity-intent",
+      "asOf": "2027-01-15"
+    },
+    {
+      "name": "profileExpiredInJanuary",
+      "op": "expired",
+      "document": "career-profile",
+      "asOf": "2027-01-15"
+    },
+    {
+      "name": "profileGeneratedAt",
+      "op": "pointer",
+      "document": "career-profile",
+      "pointer": "/freshness/profileGeneratedAt"
+    },
+    {
+      "name": "lastSubjectConfirmedAt",
+      "op": "pointer",
+      "document": "career-profile",
+      "pointer": "/freshness/lastSubjectConfirmedAt"
+    },
+    {
+      "name": "lastVerificationAt",
+      "op": "pointer",
+      "document": "career-profile",
+      "pointer": "/freshness/lastVerificationAt"
+    }
+  ],
+  "expect": {
+    "intentExpiredInSeptember": [],
+    "intentExpiredInJanuary": [
+      "intent:synthetic-2026-autumn-search"
+    ],
+    "profileExpiredInJanuary": [],
+    "profileGeneratedAt": "2026-08-14T09:15:00Z",
+    "lastSubjectConfirmedAt": "2026-08-14T09:10:00Z",
+    "lastVerificationAt": "2026-03-11"
+  }
+}

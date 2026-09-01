@@ -1,0 +1,2011 @@
+{
+  "jsonldContext": {
+    "vocab": "https://github.com/namanplentyy/thrivee-labs/ns/career#",
+    "schema": "https://schema.org/",
+    "ceasn": "https://purl.org/ctdlasn/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "id": "@id",
+    "type": "@type"
+  },
+  "jsonldType": "CareerProfile",
+  "schemaVersion": "0.2.0",
+  "profileId": "profile:synthetic-transport-planner",
+  "freshness": {
+    "profileGeneratedAt": "2026-08-14T09:15:00Z",
+    "lastSourceIngestedAt": "2026-08-14T09:02:00Z",
+    "lastSubjectConfirmedAt": "2026-08-14T09:10:00Z",
+    "lastVerificationAt": "2026-03-11",
+    "staleAfter": null
+  },
+  "disclosure": {
+    "id": "disclosure:default-policy",
+    "type": "DisclosurePolicy",
+    "defaultVisibility": "agent-discoverable",
+    "basis": "subject-configured",
+    "rules": [
+      {
+        "id": "disclosure-rule:highly-sensitive-requires-grant",
+        "type": "DisclosureRule",
+        "selector": {
+          "entityRefs": [],
+          "sensitivities": [
+            "highly-sensitive"
+          ],
+          "collections": []
+        },
+        "visibility": "requires-grant",
+        "basis": "subject-configured",
+        "note": "Highly sensitive values need an explicit grant before disclosure.",
+        "validity": {
+          "validFrom": "2026-08-01",
+          "validUntil": null,
+          "observedAt": "2026-08-14T09:05:00Z",
+          "lastConfirmedAt": "2026-08-14T09:10:00Z"
+        }
+      },
+      {
+        "id": "disclosure-rule:contact-route-withheld",
+        "type": "DisclosureRule",
+        "selector": {
+          "entityRefs": [
+            "identity:contact-route"
+          ],
+          "sensitivities": [],
+          "collections": []
+        },
+        "visibility": "withheld",
+        "basis": "subject-configured",
+        "note": "The subject withholds the direct contact route entirely; agents must route through the platform.",
+        "validity": {
+          "validFrom": "2026-08-01",
+          "validUntil": null,
+          "observedAt": "2026-08-14T09:05:00Z",
+          "lastConfirmedAt": "2026-08-14T09:10:00Z"
+        }
+      },
+      {
+        "id": "disclosure-rule:attributes-require-grant",
+        "type": "DisclosureRule",
+        "selector": {
+          "entityRefs": [],
+          "sensitivities": [],
+          "collections": [
+            "attributes"
+          ]
+        },
+        "visibility": "requires-grant",
+        "basis": "subject-configured",
+        "note": null,
+        "validity": {
+          "validFrom": "2026-08-01",
+          "validUntil": null,
+          "observedAt": "2026-08-14T09:05:00Z",
+          "lastConfirmedAt": "2026-08-14T09:10:00Z"
+        }
+      }
+    ],
+    "notes": [
+      "Career history, capabilities, evidence and verifications are discoverable by agents without a grant."
+    ],
+    "validity": {
+      "validFrom": "2026-08-01",
+      "validUntil": null,
+      "observedAt": "2026-08-14T09:05:00Z",
+      "lastConfirmedAt": "2026-08-14T09:10:00Z"
+    }
+  },
+  "sourceDocuments": [
+    {
+      "id": "source:synthetic-resume",
+      "type": "SourceDocument",
+      "mediaType": "application/pdf",
+      "contentDigest": null,
+      "extractionMethod": "document-parser",
+      "pageCount": 2,
+      "ingestedAt": "2026-08-14T09:02:00Z"
+    },
+    {
+      "id": "source:synthetic-institution-record",
+      "type": "SourceDocument",
+      "mediaType": "application/json",
+      "contentDigest": null,
+      "extractionMethod": "api-import",
+      "pageCount": null,
+      "ingestedAt": "2026-08-14T09:00:00Z"
+    },
+    {
+      "id": "source:synthetic-employer-confirmation",
+      "type": "SourceDocument",
+      "mediaType": "application/json",
+      "contentDigest": null,
+      "extractionMethod": "api-import",
+      "pageCount": null,
+      "ingestedAt": "2026-08-14T09:00:30Z"
+    },
+    {
+      "id": "source:synthetic-profile-update",
+      "type": "SourceDocument",
+      "mediaType": "text/plain",
+      "contentDigest": null,
+      "extractionMethod": "user-entry",
+      "pageCount": null,
+      "ingestedAt": "2026-08-14T09:01:00Z"
+    }
+  ],
+  "identity": [
+    {
+      "id": "identity:display-name",
+      "type": "IdentityClaim",
+      "kind": "display-name",
+      "value": {
+        "id": "claim:identity-display-name",
+        "value": "A. Example",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "A. Example",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      }
+    },
+    {
+      "id": "identity:current-location",
+      "type": "IdentityClaim",
+      "kind": "current-location",
+      "value": {
+        "id": "claim:identity-current-location",
+        "value": "Ahmedabad, Gujarat, India",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-profile-update",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Currently based in Ahmedabad, Gujarat, India.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "sensitivity": "standard",
+      "validity": {
+        "validFrom": "2024-06",
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": "2026-08-14T09:10:00Z"
+      }
+    },
+    {
+      "id": "identity:contact-route",
+      "type": "IdentityClaim",
+      "kind": "contact-route",
+      "value": {
+        "id": "claim:identity-contact-route",
+        "value": "a.example@example.org",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "a.example@example.org",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "sensitivity": "highly-sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      }
+    }
+  ],
+  "history": [
+    {
+      "id": "engagement:mplan",
+      "type": "Engagement",
+      "engagementType": {
+        "id": "claim:mplan-type",
+        "value": "education",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Master of Planning (Urban Transport), Example Institute of Technology, 2021-2023",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "organization": {
+        "id": "claim:mplan-organization",
+        "value": "Example Institute of Technology",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Example Institute of Technology",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "roleOrProgram": {
+        "id": "claim:mplan-program",
+        "value": "Master of Planning (Urban Transport)",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Master of Planning (Urban Transport)",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "location": null,
+      "periods": [
+        {
+          "id": "period:mplan",
+          "type": "TemporalPeriod",
+          "raw": "2021-2023",
+          "start": "2021",
+          "end": "2023",
+          "precision": "year",
+          "isCurrent": false,
+          "currentStatusBasis": "source-range-ended",
+          "interpretationStatus": "normalized",
+          "occurrenceLabel": null,
+          "alternatives": [],
+          "notes": [],
+          "provenance": [
+            {
+              "method": "deterministic-normalization",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "2021-2023",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "descriptions": [],
+      "credential": {
+        "credentialName": {
+          "id": "claim:mplan-credential-name",
+          "value": "Master of Planning",
+          "provenance": [
+            {
+              "method": "institution-issued",
+              "verificationStatus": "institution-verified",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-institution-record",
+                "page": null,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": null,
+                "textDigest": null,
+                "textNormalization": "unavailable"
+              },
+              "inferringAgent": null
+            }
+          ]
+        },
+        "fieldOfStudy": {
+          "id": "claim:mplan-field",
+          "value": "Urban Transport",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Master of Planning (Urban Transport)",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        },
+        "grade": null,
+        "ncrfCredits": null,
+        "nsqfLevel": null
+      },
+      "ambiguityRefs": [],
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 1,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Master of Planning (Urban Transport), Example Institute of Technology, 2021-2023",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "engagement:mobility-cell",
+      "type": "Engagement",
+      "engagementType": {
+        "id": "claim:mobility-cell-type",
+        "value": "employment",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Transport Planner, Example Metropolitan Development Authority, Aug 2023 - Present",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "organization": {
+        "id": "claim:mobility-cell-organization",
+        "value": "Example Metropolitan Development Authority",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Example Metropolitan Development Authority",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "roleOrProgram": {
+        "id": "claim:mobility-cell-role",
+        "value": "Transport Planner",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Transport Planner",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "location": {
+        "id": "claim:mobility-cell-location",
+        "value": "Ahmedabad",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Ahmedabad",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "periods": [
+        {
+          "id": "period:mobility-cell",
+          "type": "TemporalPeriod",
+          "raw": "Aug 2023 - Present",
+          "start": "2023-08",
+          "end": null,
+          "precision": "month",
+          "isCurrent": true,
+          "currentStatusBasis": "explicit-ongoing",
+          "interpretationStatus": "normalized",
+          "occurrenceLabel": null,
+          "alternatives": [],
+          "notes": [],
+          "provenance": [
+            {
+              "method": "deterministic-normalization",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Aug 2023 - Present",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "descriptions": [
+        {
+          "id": "claim:mobility-cell-description",
+          "value": "Supports route rationalisation and stop-level planning for the city bus network.",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Supports route rationalisation and stop-level planning for the city bus network.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "credential": null,
+      "ambiguityRefs": [
+        "ambiguity:shared-duty-attribution"
+      ],
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 1,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Transport Planner, Example Metropolitan Development Authority, Aug 2023 - Present",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "engagement:accessibility-study",
+      "type": "Engagement",
+      "engagementType": {
+        "id": "claim:accessibility-study-type",
+        "value": "project",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 2,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Ward-level bus accessibility study, Jan 2024 - Jun 2024",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "organization": {
+        "id": "claim:accessibility-study-organization",
+        "value": "Example Metropolitan Development Authority",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 2,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Example Metropolitan Development Authority",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "roleOrProgram": {
+        "id": "claim:accessibility-study-role",
+        "value": "Ward-level bus accessibility study",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 2,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Ward-level bus accessibility study",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "location": null,
+      "periods": [
+        {
+          "id": "period:accessibility-study",
+          "type": "TemporalPeriod",
+          "raw": "Jan 2024 - Jun 2024",
+          "start": "2024-01",
+          "end": "2024-06",
+          "precision": "month",
+          "isCurrent": false,
+          "currentStatusBasis": "source-range-ended",
+          "interpretationStatus": "normalized",
+          "occurrenceLabel": null,
+          "alternatives": [],
+          "notes": [],
+          "provenance": [
+            {
+              "method": "deterministic-normalization",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 2,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Jan 2024 - Jun 2024",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "descriptions": [
+        {
+          "id": "claim:accessibility-study-description",
+          "value": "Measured walking access to bus stops for each ward and produced a published study report.",
+          "provenance": [
+            {
+              "method": "resume-explicit",
+              "verificationStatus": "self-attested",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 2,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Measured walking access to bus stops for each ward and produced a published study report.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": null
+            }
+          ]
+        }
+      ],
+      "credential": null,
+      "ambiguityRefs": [
+        "ambiguity:shared-duty-attribution"
+      ],
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 2,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Ward-level bus accessibility study, Jan 2024 - Jun 2024",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "sharedClaims": [
+    {
+      "id": "shared-claim:gis-mapping-duty",
+      "type": "SharedClaim",
+      "kind": "responsibility",
+      "statement": {
+        "id": "claim:gis-mapping-duty",
+        "value": "Prepared GIS accessibility maps for ward-level planning review.",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 2,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Prepared GIS accessibility maps for ward-level planning review.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "candidateEngagementRefs": [
+        "engagement:mobility-cell",
+        "engagement:accessibility-study"
+      ],
+      "resolutionStatus": "unresolved",
+      "resolvedEngagementRefs": [],
+      "ambiguityRef": "ambiguity:shared-duty-attribution"
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "capability:qgis",
+      "type": "Capability",
+      "capabilityKind": "tool",
+      "label": {
+        "id": "claim:qgis-label",
+        "value": "QGIS",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Tools: QGIS, GTFS feeds",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "claimStatement": {
+        "id": "claim:qgis-statement",
+        "value": "Lists QGIS among the tools used for spatial data preparation and map production.",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Tools: QGIS, GTFS feeds",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "exercisesRefs": [],
+      "contextRefs": [
+        "engagement:mobility-cell"
+      ],
+      "evidenceRefs": [
+        "evidence:qgis-mentioned"
+      ],
+      "proficiency": null,
+      "lastDemonstratedAt": null,
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "ambiguityRefs": []
+    },
+    {
+      "id": "capability:spatial-analysis",
+      "type": "Capability",
+      "capabilityKind": "skill",
+      "label": {
+        "id": "claim:spatial-analysis-label",
+        "value": "Spatial analysis",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Skills: spatial analysis, transport demand modelling",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "claimStatement": {
+        "id": "claim:spatial-analysis-statement",
+        "value": "Applies spatial analysis to measure walking access to public transport stops.",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 2,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Measured walking access to bus stops for each ward and produced a published study report.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "exercisesRefs": [],
+      "contextRefs": [
+        "engagement:accessibility-study"
+      ],
+      "evidenceRefs": [
+        "evidence:spatial-analysis-demonstrated"
+      ],
+      "proficiency": null,
+      "lastDemonstratedAt": "2024-06",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "ambiguityRefs": [
+        "ambiguity:esco-mapping-uncertain"
+      ]
+    },
+    {
+      "id": "capability:transport-demand-modelling",
+      "type": "Capability",
+      "capabilityKind": "knowledge",
+      "label": {
+        "id": "claim:demand-modelling-label",
+        "value": "Transport demand modelling",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Skills: spatial analysis, transport demand modelling",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "claimStatement": {
+        "id": "claim:demand-modelling-statement",
+        "value": "Studied transport demand modelling as part of the Master of Planning programme.",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Skills: spatial analysis, transport demand modelling",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "exercisesRefs": [],
+      "contextRefs": [
+        "engagement:mplan"
+      ],
+      "evidenceRefs": [
+        "evidence:demand-modelling-learned"
+      ],
+      "proficiency": null,
+      "lastDemonstratedAt": null,
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "ambiguityRefs": []
+    },
+    {
+      "id": "capability:accessibility-analysis-practice",
+      "type": "Capability",
+      "capabilityKind": "practice",
+      "label": {
+        "id": "claim:accessibility-practice-label",
+        "value": "Conducting a transport accessibility analysis",
+        "provenance": [
+          {
+            "method": "agent-inferred",
+            "verificationStatus": "unverified",
+            "confidence": 0.82,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Measured walking access to bus stops for each ward and produced a published study report.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": "https://example.org/agents/resume-parser"
+          }
+        ]
+      },
+      "claimStatement": {
+        "id": "claim:accessibility-practice-statement",
+        "value": "Has carried out a ward-level transport accessibility analysis end to end, from data preparation to a published report.",
+        "provenance": [
+          {
+            "method": "agent-inferred",
+            "verificationStatus": "unverified",
+            "confidence": 0.78,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Measured walking access to bus stops for each ward and produced a published study report.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": "https://example.org/agents/resume-parser"
+          }
+        ]
+      },
+      "exercisesRefs": [
+        "capability:qgis",
+        "capability:spatial-analysis"
+      ],
+      "contextRefs": [
+        "engagement:accessibility-study"
+      ],
+      "evidenceRefs": [
+        "evidence:accessibility-report-produced"
+      ],
+      "proficiency": null,
+      "lastDemonstratedAt": "2024-06",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "ambiguityRefs": []
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact:accessibility-report",
+      "type": "Artifact",
+      "artifactKind": "report",
+      "title": {
+        "id": "claim:accessibility-report-title",
+        "value": "Ward-level bus accessibility study report",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 2,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "published study report",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "description": null,
+      "uri": null,
+      "custodian": {
+        "id": "claim:accessibility-report-custodian",
+        "value": "Example Metropolitan Development Authority",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 2,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Example Metropolitan Development Authority",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "sourceDocumentRef": null,
+      "accessMode": "on-request",
+      "validity": {
+        "validFrom": "2024-06",
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 2,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "published study report",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "artifact:mplan-certificate",
+      "type": "Artifact",
+      "artifactKind": "credential-record",
+      "title": {
+        "id": "claim:mplan-certificate-title",
+        "value": "Master of Planning degree certificate",
+        "provenance": [
+          {
+            "method": "institution-issued",
+            "verificationStatus": "institution-verified",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-institution-record",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": null,
+              "textDigest": null,
+              "textNormalization": "unavailable"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "description": null,
+      "uri": null,
+      "custodian": {
+        "id": "claim:mplan-certificate-custodian",
+        "value": "Example Institute of Technology",
+        "provenance": [
+          {
+            "method": "institution-issued",
+            "verificationStatus": "institution-verified",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-institution-record",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": null,
+              "textDigest": null,
+              "textNormalization": "unavailable"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "sourceDocumentRef": "source:synthetic-institution-record",
+      "accessMode": "on-request",
+      "validity": {
+        "validFrom": "2023",
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "institution-issued",
+          "verificationStatus": "institution-verified",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-institution-record",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence:qgis-mentioned",
+      "type": "Evidence",
+      "relation": "MentionedIn",
+      "subjectRef": "capability:qgis",
+      "targetRef": "source:synthetic-resume",
+      "notes": [
+        "The source lists the tool without describing its use."
+      ],
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 1,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Tools: QGIS, GTFS feeds",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "evidence:spatial-analysis-demonstrated",
+      "type": "Evidence",
+      "relation": "DemonstratedIn",
+      "subjectRef": "capability:spatial-analysis",
+      "targetRef": "engagement:accessibility-study",
+      "notes": [],
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 2,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Measured walking access to bus stops for each ward and produced a published study report.",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "evidence:accessibility-report-produced",
+      "type": "Evidence",
+      "relation": "ProducedIn",
+      "subjectRef": "capability:accessibility-analysis-practice",
+      "targetRef": "artifact:accessibility-report",
+      "notes": [],
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 2,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "published study report",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "evidence:demand-modelling-learned",
+      "type": "Evidence",
+      "relation": "LearnedIn",
+      "subjectRef": "capability:transport-demand-modelling",
+      "targetRef": "engagement:mplan",
+      "notes": [],
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "resume-explicit",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 1,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Skills: spatial analysis, transport demand modelling",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "verifications": [
+    {
+      "id": "verification:accessibility-report-confirmed",
+      "type": "Verification",
+      "targetRef": "evidence:accessibility-report-produced",
+      "verifier": {
+        "name": {
+          "id": "claim:accessibility-verifier-name",
+          "value": "Example Metropolitan Development Authority",
+          "provenance": [
+            {
+              "method": "institution-issued",
+              "verificationStatus": "institution-verified",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-employer-confirmation",
+                "page": null,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": null,
+                "textDigest": null,
+                "textNormalization": "unavailable"
+              },
+              "inferringAgent": null
+            }
+          ]
+        },
+        "kind": "employer",
+        "identifierUri": null
+      },
+      "method": "issuer-confirmation",
+      "status": "confirmed",
+      "verifiedAt": "2026-03-11",
+      "statement": {
+        "id": "claim:accessibility-verification-statement",
+        "value": "The authority confirmed that the named study report was produced by the subject.",
+        "provenance": [
+          {
+            "method": "institution-issued",
+            "verificationStatus": "institution-verified",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-employer-confirmation",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": null,
+              "textDigest": null,
+              "textNormalization": "unavailable"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "supportingArtifactRef": "artifact:accessibility-report",
+      "validity": {
+        "validFrom": "2026-03-11",
+        "validUntil": null,
+        "observedAt": "2026-03-11",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "institution-issued",
+          "verificationStatus": "institution-verified",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-employer-confirmation",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "verification:mplan-credential-confirmed",
+      "type": "Verification",
+      "targetRef": "claim:mplan-credential-name",
+      "verifier": {
+        "name": {
+          "id": "claim:mplan-verifier-name",
+          "value": "Example Institute of Technology",
+          "provenance": [
+            {
+              "method": "institution-issued",
+              "verificationStatus": "institution-verified",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-institution-record",
+                "page": null,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": null,
+                "textDigest": null,
+                "textNormalization": "unavailable"
+              },
+              "inferringAgent": null
+            }
+          ]
+        },
+        "kind": "issuing-institution",
+        "identifierUri": null
+      },
+      "method": "issuer-confirmation",
+      "status": "confirmed",
+      "verifiedAt": "2025-07-20",
+      "statement": null,
+      "supportingArtifactRef": "artifact:mplan-certificate",
+      "validity": {
+        "validFrom": "2025-07-20",
+        "validUntil": null,
+        "observedAt": "2025-07-20",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "institution-issued",
+          "verificationStatus": "institution-verified",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-institution-record",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "verification:mplan-certificate-confirmed",
+      "type": "Verification",
+      "targetRef": "artifact:mplan-certificate",
+      "verifier": {
+        "name": {
+          "id": "claim:mplan-registry-verifier-name",
+          "value": "Example Institute of Technology",
+          "provenance": [
+            {
+              "method": "institution-issued",
+              "verificationStatus": "institution-verified",
+              "confidence": 1,
+              "source": {
+                "documentId": "source:synthetic-institution-record",
+                "page": null,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": null,
+                "textDigest": null,
+                "textNormalization": "unavailable"
+              },
+              "inferringAgent": null
+            }
+          ]
+        },
+        "kind": "issuing-institution",
+        "identifierUri": null
+      },
+      "method": "registry-lookup",
+      "status": "confirmed",
+      "verifiedAt": "2025-07-20",
+      "statement": {
+        "id": "claim:mplan-certificate-verification-statement",
+        "value": "The institution's record system returned a matching degree certificate for the subject.",
+        "provenance": [
+          {
+            "method": "institution-issued",
+            "verificationStatus": "institution-verified",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-institution-record",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": null,
+              "textDigest": null,
+              "textNormalization": "unavailable"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "supportingArtifactRef": null,
+      "validity": {
+        "validFrom": "2025-07-20",
+        "validUntil": null,
+        "observedAt": "2025-07-20",
+        "lastConfirmedAt": null
+      },
+      "provenance": [
+        {
+          "method": "institution-issued",
+          "verificationStatus": "institution-verified",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-institution-record",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "taxonomyMappings": [
+    {
+      "id": "taxonomy-mapping:mobility-cell-nco",
+      "type": "TaxonomyMapping",
+      "subjectRef": "engagement:mobility-cell",
+      "framework": "NCO-2015",
+      "frameworkVersion": "2015",
+      "mappingStatus": "mapped",
+      "code": "2164",
+      "uri": null,
+      "label": {
+        "id": "claim:nco-2164-label",
+        "value": "Town and traffic planners",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-profile-update",
+              "page": null,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": null,
+              "textDigest": null,
+              "textNormalization": "unavailable"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "matchType": "close-match",
+      "mappingMethod": "manual-reviewed",
+      "candidates": [],
+      "validity": {
+        "validFrom": "2026-03-01",
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "notes": [
+        "Reviewed by a human against the NCO-2015 code list."
+      ],
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 0.9,
+          "source": {
+            "documentId": "source:synthetic-profile-update",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "taxonomy-mapping:spatial-analysis-esco",
+      "type": "TaxonomyMapping",
+      "subjectRef": "capability:spatial-analysis",
+      "framework": "ESCO",
+      "frameworkVersion": null,
+      "mappingStatus": "ambiguous",
+      "code": null,
+      "uri": null,
+      "label": null,
+      "matchType": "unknown",
+      "mappingMethod": "not-attempted",
+      "candidates": [
+        {
+          "code": "S1.7.1",
+          "uri": null,
+          "label": "analyse geospatial data",
+          "matchType": "close-match",
+          "method": "agent-suggested",
+          "confidence": 0.55,
+          "provenance": [
+            {
+              "method": "agent-inferred",
+              "verificationStatus": "unverified",
+              "confidence": 0.55,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Skills: spatial analysis, transport demand modelling",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": "https://example.org/agents/resume-parser"
+            }
+          ]
+        },
+        {
+          "code": "S2.4.3",
+          "uri": null,
+          "label": "apply spatial statistics",
+          "matchType": "related-match",
+          "method": "agent-suggested",
+          "confidence": 0.4,
+          "provenance": [
+            {
+              "method": "agent-inferred",
+              "verificationStatus": "unverified",
+              "confidence": 0.4,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Skills: spatial analysis, transport demand modelling",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": "https://example.org/agents/resume-parser"
+            }
+          ]
+        }
+      ],
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "notes": [
+        "Two candidate concepts were suggested and neither has been reviewed. The mapping stays unresolved."
+      ],
+      "provenance": [
+        {
+          "method": "agent-inferred",
+          "verificationStatus": "unverified",
+          "confidence": 0.55,
+          "source": {
+            "documentId": "source:synthetic-resume",
+            "page": 1,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": "Skills: spatial analysis, transport demand modelling",
+            "textDigest": null,
+            "textNormalization": "exact"
+          },
+          "inferringAgent": "https://example.org/agents/resume-parser"
+        }
+      ]
+    },
+    {
+      "id": "taxonomy-mapping:qgis-esco",
+      "type": "TaxonomyMapping",
+      "subjectRef": "capability:qgis",
+      "framework": "ESCO",
+      "frameworkVersion": null,
+      "mappingStatus": "unmapped",
+      "code": null,
+      "uri": null,
+      "label": null,
+      "matchType": "no-match",
+      "mappingMethod": "reviewed-no-match",
+      "candidates": [],
+      "validity": {
+        "validFrom": "2026-03-01",
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "notes": [
+        "Reviewed against ESCO. QGIS is a software tool rather than an ESCO skill concept, so no code applies."
+      ],
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-profile-update",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    },
+    {
+      "id": "taxonomy-mapping:mplan-nsqf",
+      "type": "TaxonomyMapping",
+      "subjectRef": "engagement:mplan",
+      "framework": "NSQF",
+      "frameworkVersion": null,
+      "mappingStatus": "unmapped",
+      "code": null,
+      "uri": null,
+      "label": null,
+      "matchType": "unknown",
+      "mappingMethod": "not-attempted",
+      "candidates": [],
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": null
+      },
+      "notes": [
+        "The source states no NSQF level and no authoritative lookup was performed. The level is unknown, not absent."
+      ],
+      "provenance": [
+        {
+          "method": "user-entered",
+          "verificationStatus": "self-attested",
+          "confidence": 1,
+          "source": {
+            "documentId": "source:synthetic-profile-update",
+            "page": null,
+            "charStart": null,
+            "charEnd": null,
+            "sourceText": null,
+            "textDigest": null,
+            "textNormalization": "unavailable"
+          },
+          "inferringAgent": null
+        }
+      ]
+    }
+  ],
+  "interests": [
+    {
+      "id": "interest:public-transport-equity",
+      "type": "Interest",
+      "kind": "field",
+      "label": {
+        "id": "claim:interest-public-transport-equity",
+        "value": "Public transport equity",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Areas of interest: public transport equity",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "contextRefs": []
+    }
+  ],
+  "languages": [
+    {
+      "id": "language:english",
+      "type": "LanguageClaim",
+      "language": {
+        "id": "claim:language-english",
+        "value": "English",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Languages: English, Gujarati",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "proficiency": null,
+      "modes": []
+    },
+    {
+      "id": "language:gujarati",
+      "type": "LanguageClaim",
+      "language": {
+        "id": "claim:language-gujarati",
+        "value": "Gujarati",
+        "provenance": [
+          {
+            "method": "resume-explicit",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Languages: English, Gujarati",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "proficiency": null,
+      "modes": []
+    }
+  ],
+  "attributes": [
+    {
+      "id": "attribute:work-authorization",
+      "type": "PersonalAttribute",
+      "kind": "work-authorization",
+      "value": {
+        "id": "claim:work-authorization",
+        "value": "Authorised to work in India",
+        "provenance": [
+          {
+            "method": "user-entered",
+            "verificationStatus": "self-attested",
+            "confidence": 1,
+            "source": {
+              "documentId": "source:synthetic-profile-update",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Authorised to work in India.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": null
+          }
+        ]
+      },
+      "sensitivity": "sensitive",
+      "validity": {
+        "validFrom": null,
+        "validUntil": null,
+        "observedAt": "2026-08-14T09:05:00Z",
+        "lastConfirmedAt": "2026-08-14T09:10:00Z"
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "id": "ambiguity:shared-duty-attribution",
+      "type": "Ambiguity",
+      "kind": "shared-description",
+      "status": "unresolved",
+      "fieldPath": "/sharedClaims/0",
+      "reason": {
+        "id": "claim:shared-duty-reason",
+        "value": "The duty line is printed between the employment entry and the project entry, so its owner is not established by the source.",
+        "provenance": [
+          {
+            "method": "agent-inferred",
+            "verificationStatus": "unverified",
+            "confidence": 0.95,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Prepared GIS accessibility maps for ward-level planning review.",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": "https://example.org/agents/resume-parser"
+          }
+        ]
+      },
+      "relatedRefs": [
+        "engagement:mobility-cell",
+        "engagement:accessibility-study"
+      ],
+      "candidates": [
+        {
+          "value": "employment entry",
+          "candidateRefs": [
+            "engagement:mobility-cell"
+          ],
+          "confidence": 0.5,
+          "provenance": [
+            {
+              "method": "agent-inferred",
+              "verificationStatus": "unverified",
+              "confidence": 0.5,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Prepared GIS accessibility maps for ward-level planning review.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": "https://example.org/agents/resume-parser"
+            }
+          ]
+        },
+        {
+          "value": "project entry",
+          "candidateRefs": [
+            "engagement:accessibility-study"
+          ],
+          "confidence": 0.5,
+          "provenance": [
+            {
+              "method": "agent-inferred",
+              "verificationStatus": "unverified",
+              "confidence": 0.5,
+              "source": {
+                "documentId": "source:synthetic-resume",
+                "page": 1,
+                "charStart": null,
+                "charEnd": null,
+                "sourceText": "Prepared GIS accessibility maps for ward-level planning review.",
+                "textDigest": null,
+                "textNormalization": "exact"
+              },
+              "inferringAgent": "https://example.org/agents/resume-parser"
+            }
+          ]
+        }
+      ],
+      "selectedValue": null
+    },
+    {
+      "id": "ambiguity:esco-mapping-uncertain",
+      "type": "Ambiguity",
+      "kind": "taxonomy-mapping",
+      "status": "unresolved",
+      "fieldPath": "/taxonomyMappings/1/code",
+      "reason": {
+        "id": "claim:esco-mapping-reason",
+        "value": "Two ESCO concepts are plausible for the spatial analysis capability and neither has been reviewed.",
+        "provenance": [
+          {
+            "method": "agent-inferred",
+            "verificationStatus": "unverified",
+            "confidence": 0.6,
+            "source": {
+              "documentId": "source:synthetic-resume",
+              "page": 1,
+              "charStart": null,
+              "charEnd": null,
+              "sourceText": "Skills: spatial analysis, transport demand modelling",
+              "textDigest": null,
+              "textNormalization": "exact"
+            },
+            "inferringAgent": "https://example.org/agents/resume-parser"
+          }
+        ]
+      },
+      "relatedRefs": [
+        "capability:spatial-analysis",
+        "taxonomy-mapping:spatial-analysis-esco"
+      ],
+      "candidates": [],
+      "selectedValue": null
+    }
+  ],
+  "warnings": [
+    {
+      "id": "warning:nsqf-not-stated",
+      "type": "Warning",
+      "code": "NSQF_LEVEL_NOT_STATED",
+      "severity": "info",
+      "message": "The source states no NSQF level or NCrF credit value for the Master of Planning programme, and none was inferred.",
+      "relatedRefs": [
+        "engagement:mplan",
+        "taxonomy-mapping:mplan-nsqf"
+      ]
+    },
+    {
+      "id": "warning:esco-unresolved",
+      "type": "Warning",
+      "code": "TAXONOMY_MAPPING_UNRESOLVED",
+      "severity": "warning",
+      "message": "The ESCO mapping for the spatial analysis capability is ambiguous and holds unreviewed candidates only.",
+      "relatedRefs": [
+        "capability:spatial-analysis",
+        "taxonomy-mapping:spatial-analysis-esco",
+        "ambiguity:esco-mapping-uncertain"
+      ]
+    },
+    {
+      "id": "warning:shared-duty-unresolved",
+      "type": "Warning",
+      "code": "SHARED_CLAIM_UNRESOLVED",
+      "severity": "warning",
+      "message": "One duty statement could belong to either the employment entry or the project entry and was not assigned.",
+      "relatedRefs": [
+        "shared-claim:gis-mapping-duty",
+        "ambiguity:shared-duty-attribution"
+      ]
+    }
+  ]
+}

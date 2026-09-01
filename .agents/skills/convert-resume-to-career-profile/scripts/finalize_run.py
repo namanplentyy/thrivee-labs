@@ -34,6 +34,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("pdf", type=Path)
     parser.add_argument("profile", type=Path)
     parser.add_argument("inventory", type=Path)
+    parser.add_argument(
+        "--intent",
+        type=Path,
+        help=(
+            "Optional OpportunityIntent document, stored alongside the profile. Supply it only "
+            "when the source expressed employment-market intent."
+        ),
+    )
     parser.add_argument("--repo-root", type=Path)
     parser.add_argument("--timestamp", help="UTC timestamp in YYYYMMDDTHHMMSSZ form")
     parser.add_argument(
@@ -55,14 +63,21 @@ def main() -> None:
     source_pdf = args.pdf.expanduser().resolve()
     profile_path = args.profile.expanduser().resolve()
     inventory_path = args.inventory.expanduser().resolve()
-    for path, label in (
+    intent_path = args.intent.expanduser().resolve() if args.intent else None
+    required = [
         (source_pdf, "PDF"),
         (profile_path, "profile"),
         (inventory_path, "source inventory"),
-    ):
+    ]
+    if intent_path is not None:
+        required.append((intent_path, "opportunity intent"))
+    for path, label in required:
         if not path.is_file():
             raise SystemExit(f"{label} not found: {path}")
-    for path, label in ((profile_path, "Draft profile"), (inventory_path, "Inventory")):
+    outside_repository = [(profile_path, "Draft profile"), (inventory_path, "Inventory")]
+    if intent_path is not None:
+        outside_repository.append((intent_path, "Draft opportunity intent"))
+    for path, label in outside_repository:
         try:
             path.relative_to(repository_root)
         except ValueError:
@@ -106,6 +121,18 @@ def main() -> None:
         raise SystemExit("Profile source document ID does not match the prepared PDF.")
 
     validation = validate_profile(profile_path, repository_root)
+    intent_validation = (
+        validate_profile(
+            intent_path, repository_root, companion_profile_path=profile_path
+        )
+        if intent_path is not None
+        else None
+    )
+    if intent_validation is not None:
+        if intent_validation["documentType"] != "OpportunityIntent":
+            raise SystemExit("The --intent document must declare @type OpportunityIntent.")
+        if intent_validation["schemaVersion"] != validation["schemaVersion"]:
+            raise SystemExit("The profile and the opportunity intent declare different versions.")
     repository = validation["repository"]
     if not args.dry_run:
         if not repository["url"] or not repository["revision"]:
@@ -125,8 +152,15 @@ def main() -> None:
     version_label = ".".join(version_parts[:2])
     output_name = f"career-profile.v{version_label}.jsonld"
     output_profile = run_dir / output_name
-    if not git_ignored(repository_root, output_profile):
-        raise SystemExit("Refusing to write because the private output path is not ignored by Git.")
+    intent_name = f"opportunity-intent.v{version_label}.jsonld" if intent_path else None
+    output_intent = run_dir / intent_name if intent_name else None
+    for candidate in (output_profile, output_intent):
+        if candidate is None:
+            continue
+        if not git_ignored(repository_root, candidate):
+            raise SystemExit(
+                "Refusing to write because the private output path is not ignored by Git."
+            )
     validation["gitIgnored"] = True
     if run_dir.exists():
         raise SystemExit(f"Run directory already exists: {run_dir}")
@@ -155,6 +189,15 @@ def main() -> None:
             "profileId": profile.get("profileId"),
             "fileName": output_name,
             "sha256": validation["profileSha256"],
+            "opportunityIntent": (
+                {
+                    "intentId": load_json(intent_path).get("intentId"),
+                    "fileName": intent_name,
+                    "sha256": intent_validation["profileSha256"],
+                }
+                if intent_validation is not None
+                else None
+            ),
         },
         "authority": {
             "repository": repository["url"],
@@ -183,6 +226,7 @@ def main() -> None:
             "inventorySha256": sha256_file(inventory_path),
         },
         "validation": validation,
+        "intentValidation": intent_validation,
         "privacy": {
             "containsPersonalData": True,
             "originalResumeCopied": False,
@@ -193,6 +237,7 @@ def main() -> None:
     result = {
         "runDirectory": str(run_dir),
         "profile": str(output_profile),
+        "opportunityIntent": str(output_intent) if output_intent else None,
         "metadata": str(run_dir / "run-metadata.json"),
         "dryRun": args.dry_run,
     }
@@ -208,6 +253,9 @@ def main() -> None:
     try:
         shutil.copyfile(profile_path, temporary_dir / output_name)
         (temporary_dir / output_name).chmod(0o600)
+        if intent_path is not None and intent_name is not None:
+            shutil.copyfile(intent_path, temporary_dir / intent_name)
+            (temporary_dir / intent_name).chmod(0o600)
         metadata_path = temporary_dir / "run-metadata.json"
         metadata_path.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
         metadata_path.chmod(0o600)
@@ -217,6 +265,13 @@ def main() -> None:
         raise
 
     validate_profile(output_profile, repository_root, require_git_ignored=True)
+    if output_intent is not None:
+        validate_profile(
+            output_intent,
+            repository_root,
+            require_git_ignored=True,
+            companion_profile_path=output_profile,
+        )
     print(json.dumps(result, indent=2))
 
 

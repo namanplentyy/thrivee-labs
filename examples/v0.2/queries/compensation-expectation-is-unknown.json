@@ -1,0 +1,36 @@
+{
+  "id": "query:compensation-expectation-is-unknown",
+  "question": "What compensation does this person expect?",
+  "asOf": "2026-09-01",
+  "notes": [
+    "A negative fixture. The correct answer is 'not stated'. An agent must be able to reach that conclusion structurally, and the schema must not tempt a producer into inventing a range."
+  ],
+  "steps": [
+    {
+      "name": "compensationExpectation",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/compensationExpectation"
+    },
+    {
+      "name": "warningCodes",
+      "op": "collect",
+      "document": "opportunity-intent",
+      "collection": "warnings",
+      "select": "/code"
+    },
+    {
+      "name": "compensationRuleVisibility",
+      "op": "pointer",
+      "document": "opportunity-intent",
+      "pointer": "/disclosure/rules/0/visibility"
+    }
+  ],
+  "expect": {
+    "compensationExpectation": null,
+    "warningCodes": [
+      "COMPENSATION_EXPECTATION_NOT_STATED"
+    ],
+    "compensationRuleVisibility": "requires-grant"
+  }
+}

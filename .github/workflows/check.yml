@@ -1,0 +1,48 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The job name is the status-check context that branch protection requires on
+  # main. Renaming it silently stops main from requiring this check.
+  check:
+    name: check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-check.txt
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements-check.txt
+
+      # Verifies that the transport schemas are current and share identical
+      # definitions, validates the v0.1 and v0.2 examples and their round-trips,
+      # runs the v0.2 semantic rules and the negative tests that prove each rule
+      # rejects a violating document, answers every agent-query fixture, and
+      # typechecks the TypeScript.
+      - name: Run checks
+        run: npm run check
