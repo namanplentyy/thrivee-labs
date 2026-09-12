@@ -39,10 +39,7 @@ jobs:
       - name: Install Python dependencies
         run: python3 -m pip install -r requirements-check.txt
 
-      # Verifies that the transport schemas are current and share identical
-      # definitions, validates the v0.1 and v0.2 examples and their round-trips,
-      # runs the v0.2 semantic rules and the negative tests that prove each rule
-      # rejects a violating document, answers every agent-query fixture, and
-      # typechecks the TypeScript.
+      # See the "Quick validation" section of README.md for what this
+      # verifies. Described there, not here, so the two cannot drift apart.
       - name: Run checks
         run: npm run check
