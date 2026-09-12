@@ -40,9 +40,10 @@ jobs:
         run: python3 -m pip install -r requirements-check.txt
 
       # Verifies that the transport schemas are current and share identical
-      # definitions, validates the v0.1 and v0.2 examples and their round-trips,
-      # runs the v0.2 semantic rules and the negative tests that prove each rule
-      # rejects a violating document, answers every agent-query fixture, and
-      # typechecks the TypeScript.
+      # definitions across the whole document family, validates the v0.1, v0.2
+      # and v0.3 examples and their round-trips, runs the v0.2 and v0.3 semantic
+      # rules and the negative tests that prove each rule rejects a violating
+      # document, answers every query fixture, and typechecks the TypeScript.
+      # Keep this in sync with the "check" script description in README.md.
       - name: Run checks
         run: npm run check
